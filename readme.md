@@ -1,4 +1,4 @@
-# Achtung! Cthulhu (Call of Cthulhu v7)
+# Achtung! Cthulhu (CoC 7th)
 
   A simple [**Roll20**](https://roll20.net/) character sheet for **Achtung! Cthulhu** using **Call of Cthulhu 7th Edition** rules.
 
