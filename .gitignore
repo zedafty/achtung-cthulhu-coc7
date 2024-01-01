@@ -1,7 +1,5 @@
 *@*
-*dev*
-/npp*
-/test*
 /node*
-/build*
+/tmp*
+npp*
 package*
