@@ -30,7 +30,7 @@ This is a [**Roll20**](https://roll20.net/) character sheet for **Achtung! Cthul
 
 # Changelog
 
-## v1.0 (2024-01-18)
+## v1.00 (2024-01-18)
 - Initial release
 
 ## Draft (2023-12-18)
