@@ -5,7 +5,7 @@
 // =============================================================================
 
 const Sheet = {
-	"version" : 1.00
+	"version" : 1.01
 };
 
 // =============================================================================
@@ -1514,7 +1514,8 @@ on("clicked:data-cancel", closeModal);
 // =============================================================================
 
 const initializeSheet = function () {
-	let u = {};
+	let u1 = {};
+	let u2 = {};
 	let l = {};
 	let id;
 	let i;
@@ -1539,12 +1540,15 @@ const initializeSheet = function () {
 										for (i in l) {
 											if (l[i] == 0) {
 												id = generateRowID();
-												u["repeating_" + i + "_" + id + "_name"] = getLang("lng-new");
-												if (i != "powers" && i != "abilities") u["repeating_" + i + "_" + id + "_show-option"] = "1";
+												if (i == "weapons") u2["repeating_" + i + "_" + id + "_name"] = getLang("lng-new");
+												else u1["repeating_" + i + "_" + id + "_name"] = getLang("lng-new");
+												if (i != "powers" && i != "abilities") u1["repeating_" + i + "_" + id + "_show-option"] = "1";
 											}
 										}
-										u["sheet-init"] = "1";
-										setAttrs(u, {"silent" : true});
+										u1["sheet-init"] = "1";
+										setAttrs(u1, {"silent" : true}, function() {
+											setAttrs(u2);
+										});
 									});
 								});
 							});
