@@ -1,6 +1,7 @@
 *@*
 /node*
 /tmp*
+dev*
 npp*
+grunt*
 package*
-grunt
