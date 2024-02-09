@@ -1,6 +1,6 @@
 /* Achtung! Cthulhu (CoC 7th) Character Sheet CSS */
 /* Coding by Zedafty */
-/* Version 1.01 */
+/* Version 1.02 */
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
@@ -1628,7 +1628,7 @@ input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span
 
 .header .status {
 	display: grid;
-	grid-template-columns: 40% 60%;
+	grid-template-columns: 45% 55%;
 }
 .header .status .edit-field[type="number"],
 .header .status .number {
@@ -2860,7 +2860,7 @@ input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 /* ========================================================================== */
 
 .talents .reprow {
-	grid-template-columns: 1fr 1fr 34px;
+	grid-template-columns: 2fr 1fr 34px;
 }
 .talents .reprow.head {
 	margin-top: 0;

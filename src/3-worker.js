@@ -5,7 +5,7 @@
 // =============================================================================
 
 const Sheet = {
-	"version" : 1.01
+	"version" : 1.02
 };
 
 // =============================================================================
@@ -631,6 +631,7 @@ on("change:repeating_weapons:skill", function(e) { // e = event
 });
 
 on("change:repeating_weapons:dmg", function(e) { // e = event
+	setUniqueIdentifier(e.sourceAttribute.substr(0,39));
 	let s = e.newValue;
 	let k = "repeating_weapons_";
 	let r = /^(.*)\s*\/\s*(\d+)\s*(m|y|yd)$/i; // dmg-rng regexp
