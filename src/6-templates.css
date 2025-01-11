@@ -1,0 +1,340 @@
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Rolltemplates */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.sheet-rolltemplate-dice *::selection,
+.sheet-rolltemplate-check *::selection,
+.sheet-rolltemplate-attack *::selection,
+.sheet-rolltemplate-damage *::selection,
+.sheet-rolltemplate-spell *::selection,
+.sheet-rolltemplate-desc *::selection {
+	color: #fff;
+	background-color: #b23;
+}
+.sheet-rolltemplate-dice .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-check .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-attack .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-damage .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-spell .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-desc .sheet-roll-wrapper .inlinerollresult,
+.sheet-rolltemplate-dice .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-check .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-attack .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-damage .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-spell .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-desc .sheet-roll-wrapper .inlinerollresult.fullcrit,
+.sheet-rolltemplate-dice .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-check .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-attack .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-damage .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-spell .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-desc .sheet-roll-wrapper .inlinerollresult.fullfail,
+.sheet-rolltemplate-dice .sheet-roll-wrapper .inlinerollresult.importantroll,
+.sheet-rolltemplate-check .sheet-roll-wrapper .inlinerollresult.importantroll,
+.sheet-rolltemplate-attack .sheet-roll-wrapper .inlinerollresult.importantroll,
+.sheet-rolltemplate-damage .sheet-roll-wrapper .inlinerollresult.importantroll,
+.sheet-rolltemplate-spell .sheet-roll-wrapper .inlinerollresult.importantroll,
+.sheet-rolltemplate-desc .sheet-roll-wrapper .inlinerollresult.importantroll {
+	padding: 0;
+	font-size: inherit;
+	border: none;
+	background-color: transparent;
+}
+.sheet-rolltemplate-dice .sheet-roll-wrapper,
+.sheet-rolltemplate-check .sheet-roll-wrapper,
+.sheet-rolltemplate-attack .sheet-roll-wrapper,
+.sheet-rolltemplate-damage .sheet-roll-wrapper,
+.sheet-rolltemplate-spell .sheet-roll-wrapper,
+.sheet-rolltemplate-desc .sheet-roll-wrapper {
+	font-size: 0;
+	text-align: center;
+	color: #111;
+	overflow: hidden;
+}
+.sheet-rolltemplate-dice .sheet-roll-outer,
+.sheet-rolltemplate-check .sheet-roll-outer,
+.sheet-rolltemplate-attack .sheet-roll-outer,
+.sheet-rolltemplate-damage .sheet-roll-outer,
+.sheet-rolltemplate-spell .sheet-roll-outer,
+.sheet-rolltemplate-desc .sheet-roll-outer {
+	margin: 12px;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
+}
+.sheet-rolltemplate-dice .sheet-roll-inner,
+.sheet-rolltemplate-check .sheet-roll-inner,
+.sheet-rolltemplate-attack .sheet-roll-inner,
+.sheet-rolltemplate-damage .sheet-roll-inner,
+.sheet-rolltemplate-spell .sheet-roll-inner,
+.sheet-rolltemplate-desc .sheet-roll-inner {
+	padding: 2px 4px 4px;
+	border-image-source: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-border-paper.png");
+	border-image-slice: 80;
+	border-image-width: 80px;
+	border-image-outset: 12px;
+	border-image-repeat: round;
+}
+.sheet-rolltemplate-dice .sheet-char,
+.sheet-rolltemplate-check .sheet-char,
+.sheet-rolltemplate-attack .sheet-char,
+.sheet-rolltemplate-damage .sheet-char,
+.sheet-rolltemplate-spell .sheet-char,
+.sheet-rolltemplate-desc .sheet-char {
+	margin: 4px 0;
+	padding: 2px;
+	line-height: 1;
+	font-size: 20px;
+	color: #fff;
+	border: 1px solid #4444;
+	background-color: #6669;
+	text-shadow: 0 0 3px #000;
+}
+.sheet-rolltemplate-dice .sheet-pc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-check .sheet-pc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-attack .sheet-pc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-damage .sheet-pc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-spell .sheet-pc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-desc .sheet-pc ~ .sheet-roll-inner .sheet-char {
+	background-color: #7759;
+}
+.sheet-rolltemplate-dice .sheet-npc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-check .sheet-npc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-attack .sheet-npc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-damage .sheet-npc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-spell .sheet-npc ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-desc .sheet-npc ~ .sheet-roll-inner .sheet-char {
+	background-color: #4459;
+}
+.sheet-rolltemplate-dice .sheet-monster ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-check .sheet-monster ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-attack .sheet-monster ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-damage .sheet-monster ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-spell .sheet-monster ~ .sheet-roll-inner .sheet-char,
+.sheet-rolltemplate-desc .sheet-monster ~ .sheet-roll-inner .sheet-char {
+	background-color: #6459;
+}
+.sheet-rolltemplate-check .sheet-roll-dice,
+.sheet-rolltemplate-attack .sheet-roll-dice,
+.sheet-rolltemplate-spell .sheet-roll-dice {
+	font-weight: bold;
+}
+.sheet-rolltemplate-dice .sheet-roll-name,
+.sheet-rolltemplate-check .sheet-roll-name,
+.sheet-rolltemplate-attack .sheet-roll-name,
+.sheet-rolltemplate-damage .sheet-roll-name,
+.sheet-rolltemplate-spell .sheet-roll-name,
+.sheet-rolltemplate-desc .sheet-roll-name,
+.sheet-rolltemplate-init .sheet-roll-result,
+.sheet-rolltemplate-dice .sheet-roll-result,
+.sheet-rolltemplate-check .sheet-roll-result,
+.sheet-rolltemplate-attack .sheet-roll-result,
+.sheet-rolltemplate-damage .sheet-roll-result {
+	margin-top: 4px;
+	font-size: 16px;
+	line-height: 1;
+}
+.sheet-rolltemplate-init .sheet-roll-result,
+.sheet-rolltemplate-dice .sheet-roll-result,
+.sheet-rolltemplate-check .sheet-roll-result,
+.sheet-rolltemplate-attack .sheet-roll-result,
+.sheet-rolltemplate-damage .sheet-roll-result {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.sheet-rolltemplate-dice .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value {
+	font-size: 20px;
+	font-weight: bold;
+}
+.sheet-rolltemplate-check .sheet-roll-result::before,
+.sheet-rolltemplate-attack .sheet-roll-result::before {
+	content: "";
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	margin-left: -28px;
+	margin-right: 4px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-d10.png");
+}
+.sheet-rolltemplate-dice .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value,
+.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value {
+	color: #664;
+}
+.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value .inlinerollresult.fullcrit {
+	color: #284;
+}
+.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value .inlinerollresult.fullfail {
+	color: #c24;
+}
+.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value .inlinerollresult {
+	color: #c24;
+}
+.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-compare,
+.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-compare {
+	display: inline-block;
+	margin: 0 4px;
+	font-size: 13px;
+	color: #111c;
+}
+.sheet-rolltemplate-check .sheet-roll-infos,
+.sheet-rolltemplate-attack .sheet-roll-infos {
+	line-height: 16px;
+}
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-hard,
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-extreme,
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-bonus,
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-penalty,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-hard,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-extreme,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-bonus,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-penalty {
+	display: inline-block;
+	margin: 0 4px;
+	padding: 0 4px;
+	color: #fff;
+	font-size: 12px;
+	font-family: sans-serif;
+	border: 1px solid #3333;
+}
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-bonus,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-bonus {
+	background-color: #685;
+}
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-hard,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-hard {
+	background-color: #d53;
+}
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-extreme,
+.sheet-rolltemplate-check .sheet-roll-infos .sheet-penalty,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-extreme,
+.sheet-rolltemplate-attack .sheet-roll-infos .sheet-penalty {
+	background-color: #b23;
+}
+.sheet-rolltemplate-check .sheet-success,
+.sheet-rolltemplate-check .sheet-failure,
+.sheet-rolltemplate-attack .sheet-success,
+.sheet-rolltemplate-attack .sheet-failure {
+	margin: 4px 0 2px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.sheet-rolltemplate-check .sheet-success,
+.sheet-rolltemplate-attack .sheet-success {
+	color: #284;
+}
+.sheet-rolltemplate-check .sheet-failure,
+.sheet-rolltemplate-attack .sheet-failure {
+	color: #c24;
+}
+.sheet-rolltemplate-attack .sheet-weapon-malfunction,
+.sheet-rolltemplate-damage .sheet-damage-none {
+	margin: 8px auto 4px;
+	padding: 2px 0;
+	line-height: 1;
+}
+.sheet-rolltemplate-attack .sheet-weapon-malfunction {
+	width: 100px;
+	font-size: 24px;
+	color: #c23;
+	border: 2px dotted #c23;
+	background-color: #fd09;
+}
+.sheet-rolltemplate-damage .sheet-damage-none {
+	font-size: 20px;
+	color: #664;
+}
+.sheet-rolltemplate-attack .sheet-attack-opposed {
+	font-size: 14px;
+	margin: 6px 0 2px;
+	padding-top: 6px;
+	border-top: 1px solid #6646;
+}
+.sheet-rolltemplate-attack .sheet-attack-opposed strong[data-i18n-title] {
+	cursor: help;
+}
+.sheet-rolltemplate-attack .sheet-roll-wrapper a[href] {
+	margin: 6px;
+	padding: 4px 6px;
+	line-height: 1;
+	color: #fff;
+	font-size: 20px;
+	text-decoration: none;
+	border: 1px solid #3336;
+	border-radius: 6px;
+	background-color: #b23;
+	text-shadow: 0 -1px #333c;
+	box-shadow: 0 1px 3px #333c;
+}
+.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:focus,
+.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:hover {
+	background-color: #e72;
+}
+.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:active {
+	background-color: #c30;
+	box-shadow: 0 1px 3px #333c inset;
+}
+.sheet-rolltemplate-damage .sheet-roll-dice {
+	font-size: 12px;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius {
+	display: none;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice,
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	max-width: 200px;
+	margin: auto;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice > span + span,
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result > span + span {
+	border-left: 1px solid #4446;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice {
+	margin-top: 6px;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result {
+	margin-top: 0;
+}
+.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result .sheet-roll-value {
+	padding-bottom: 4px;
+}
+.sheet-rolltemplate-damage .sheet-roll-row {
+	font-size: 12px;
+}
+.sheet-rolltemplate-spell .sheet-roll-name,
+.sheet-rolltemplate-desc .sheet-roll-name {
+	margin-bottom: 4px;
+}
+.sheet-rolltemplate-damage .sheet-roll-row,
+.sheet-rolltemplate-spell .sheet-roll-row,
+.sheet-rolltemplate-desc .sheet-roll-row {
+	padding: 2px 0;
+	font-size: 13px;
+	line-height: 16px;
+	text-align: center;
+}
+.sheet-rolltemplate-damage .sheet-roll-row.sheet-dmg-alt {
+	margin-top: 6px;
+	padding-top: 6px;
+	border-top: 1px solid #4436;
+}
+.sheet-rolltemplate-spell .sheet-roll-desc,
+.sheet-rolltemplate-desc .sheet-roll-desc {
+	padding: 4px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align: justify;
+}
+.sheet-rolltemplate-spell .sheet-roll-cost + .sheet-roll-dice::before {
+	content: " ; ";
+	font-weight: normal;
+}

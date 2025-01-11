@@ -1,9 +1,9 @@
 <rolltemplate class="sheet-rolltemplate-dice">
 	<div class="sheet-roll-wrapper">
 		<div class="sheet-roll-outer">
-			{{#rollTotal() sheet 2}}<span class="sheet-pc"></span>{{/rollTotal() sheet 2}}
-			{{#rollTotal() sheet 3}}<span class="sheet-npc"></span>{{/rollTotal() sheet 3}}
-			{{#rollTotal() sheet 4}}<span class="sheet-monster"></span>{{/rollTotal() sheet 4}}
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
 			<div class="sheet-roll-inner">
 				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
 				<div class="sheet-roll-name"><strong>{{name}}</strong></div>
@@ -18,9 +18,9 @@
 <rolltemplate class="sheet-rolltemplate-check">
 	<div class="sheet-roll-wrapper">
 		<div class="sheet-roll-outer">
-			{{#rollTotal() sheet 2}}<span class="sheet-pc"></span>{{/rollTotal() sheet 2}}
-			{{#rollTotal() sheet 3}}<span class="sheet-npc"></span>{{/rollTotal() sheet 3}}
-			{{#rollTotal() sheet 4}}<span class="sheet-monster"></span>{{/rollTotal() sheet 4}}
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
 			<div class="sheet-roll-inner">
 				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
 				<div class="sheet-roll-infos">
@@ -52,9 +52,9 @@
 <rolltemplate class="sheet-rolltemplate-attack">
 	<div class="sheet-roll-wrapper">
 		<div class="sheet-roll-outer">
-			{{#rollTotal() sheet 2}}<span class="sheet-pc"></span>{{/rollTotal() sheet 2}}
-			{{#rollTotal() sheet 3}}<span class="sheet-npc"></span>{{/rollTotal() sheet 3}}
-			{{#rollTotal() sheet 4}}<span class="sheet-monster"></span>{{/rollTotal() sheet 4}}
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
 			<div class="sheet-roll-inner">
 				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
 				<div class="sheet-roll-infos">
@@ -81,7 +81,7 @@
 				{{#rollWasCrit() roll}}<div class="sheet-success" data-i18n="tpl-critical-success"></div>{{/rollWasCrit() roll}}
 				{{#rollWasFumble() roll}}<div class="sheet-failure" data-i18n="tpl-critical-failure"></div>{{/rollWasFumble() roll}}
 				{{#rollTotal() opp-chk 1}}<div class="sheet-attack-opposed"><span data-i18n="tpl-opposed"></span><span data-i18n="lng-colon"></span>{{#opp-own}}<strong data-i18n="{{opp-own}}-bb" data-i18n-title="{{opp-own}}"></strong>&nbsp;{{/opp-own}}<span data-i18n="tpl-versus"></span>&nbsp;{{#opp-tar}}<strong data-i18n="{{opp-tar}}-bb" data-i18n-title="{{opp-tar}}"></strong>{{/opp-tar}}</div>{{/rollTotal() opp-chk 1}}
-				{{#^rollWasFumble() roll}}<div>{{damage-link}}{{#rollTotal() impale 1}}{{#rollLess() roll fifth}}{{#impale-link}}{{impale-link}}{{/impale-link}}{{/rollLess() roll fifth}}{{/rollTotal() impale 1}}</div>{{/^rollWasFumble() roll}}
+				{{#^rollWasFumble() roll}}<div>{{damage-link}}{{#rollLess() roll fifth}}{{#extreme-link}}{{extreme-link}}{{/extreme-link}}{{/rollLess() roll fifth}}</div>{{/^rollWasFumble() roll}}
 				{{/rollTotal() malf 0}}
 			</div>
 		</div>
@@ -91,15 +91,16 @@
 <rolltemplate class="sheet-rolltemplate-damage">
 	<div class="sheet-roll-wrapper">
 		<div class="sheet-roll-outer">
-			{{#rollTotal() sheet 2}}<span class="sheet-pc"></span>{{/rollTotal() sheet 2}}
-			{{#rollTotal() sheet 3}}<span class="sheet-npc"></span>{{/rollTotal() sheet 3}}
-			{{#rollTotal() sheet 4}}<span class="sheet-monster"></span>{{/rollTotal() sheet 4}}
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
 			<div class="sheet-roll-inner">
 				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
 				<div class="sheet-roll-name"><strong>{{name}}</strong></div>
 				{{#rollGreater() explode 0}}<span class="sheet-roll-radius">&</span>{{/rollGreater() explode 0}}
 				{{#rollGreater() explode 0}}{{#rollGreater() dmg-rng-n1 0}}<div class="sheet-roll-dice"><span>{{dmg-rng-n1}} {{dmg-rng-u}}</span><span>{{dmg-rng-n2}} {{dmg-rng-u}}</span><span>{{dmg-rng-n3}} {{dmg-rng-u}}</span></div>{{/rollGreater() dmg-rng-n1 0}}{{/rollGreater() explode 0}}
 				{{#rollGreater() roll 0}}<div class="sheet-roll-result"><span class="sheet-roll-value">{{roll}}</span>{{#rollGreater() explode 0}}<span class="sheet-roll-value">{{roll-half}}</span><span class="sheet-roll-value">{{roll-third}}</span>{{/rollGreater() explode 0}}</div>{{/rollGreater() roll 0}}
+				{{#^rollGreater() roll 0}}<div class="sheet-damage-none" data-i18n="tpl-damage-none"></div>{{/^rollGreater() roll 0}}
 				{{#rollGreater() burn 0}}<div class="sheet-roll-row"><strong data-i18n="wpn-burn"></strong><span data-i18n="lng-colon"></span><span data-i18n="tpl-burn"></span></div>{{/rollGreater() burn 0}}
 				{{#rollGreater() strangle 0}}<div class="sheet-roll-row"><strong data-i18n="wpn-strangle"></strong><span data-i18n="lng-colon"></span><span data-i18n="tpl-strangle"></span></div>{{/rollGreater() strangle 0}}
 				{{#rollGreater() stun 0}}<div class="sheet-roll-row"><strong data-i18n="wpn-stun"></strong><span data-i18n="lng-colon"></span><span class="sheet-roll-dice">{{stun-dur}}</span><span data-i18n="tpl-round{{#rollGreater() stun-dur 1}}s{{/rollGreater() stun-dur 1}}"></span></div>{{/rollGreater() stun 0}}
@@ -112,16 +113,34 @@
 <rolltemplate class="sheet-rolltemplate-spell">
 	<div class="sheet-roll-wrapper">
 		<div class="sheet-roll-outer">
-			{{#rollTotal() sheet 2}}<span class="sheet-pc"></span>{{/rollTotal() sheet 2}}
-			{{#rollTotal() sheet 3}}<span class="sheet-npc"></span>{{/rollTotal() sheet 3}}
-			{{#rollTotal() sheet 4}}<span class="sheet-monster"></span>{{/rollTotal() sheet 4}}
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
 			<div class="sheet-roll-inner">
 				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
 				<div class="sheet-roll-name"><strong>{{name}}</strong></div>
-				{{#rollGreater() cost-tot 0}}<div class="sheet-roll-row"><span data-i18n="tpl-cost"></span>&nbsp;{{#rollGreater() cost-mp 0}}<span class="sheet-roll-dice">{{cost-mp}}</span><span data-i18n="mp-bb" class="sheet-roll-cost"></span>{{/rollGreater() cost-mp 0}}{{#rollGreater() cost-san 0}}<span class="sheet-roll-dice">{{cost-san}}</span><span data-i18n="san-bb" class="sheet-roll-cost"></span>{{/rollGreater() cost-san 0}}</div>{{/rollGreater() cost-tot 0}}
+				{{#rollGreater() cost-tot 0}}<div class="sheet-roll-row"><span data-i18n="tpl-cost"></span>{{#rollGreater() cost-mp 0}}&nbsp;<span class="sheet-roll-dice">{{cost-mp}}</span>&nbsp;<span data-i18n="mp-bb" class="sheet-roll-cost"></span>{{/rollGreater() cost-mp 0}}{{#rollGreater() cost-san 0}}&nbsp;<span class="sheet-roll-dice">{{cost-san}}</span>&nbsp;<span data-i18n="san-bb" class="sheet-roll-cost"></span>{{/rollGreater() cost-san 0}}</div>{{/rollGreater() cost-tot 0}}
 				{{#cost-other}}<div class="sheet-roll-row"><strong data-i18n="tpl-cost-other"></strong>&nbsp;<span>{{cost-other}}</span></div>{{/cost-other}}
 				{{#cast-time}}<div class="sheet-roll-row"><strong data-i18n="spl-cast-time"></strong></strong>&nbsp;<span>{{cast-time}}</span></div>{{/cast-time}}
-				{{#note}}<div class="sheet-roll-row">{{note}}</div>{{/note}}
+				{{#desc}}<div class="sheet-roll-desc">{{desc}}</div>{{/desc}}
+			</div>
+		</div>
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-desc">
+	<div class="sheet-roll-wrapper">
+		<div class="sheet-roll-outer">
+			{{#rollTotal() sheet 1}}<span class="sheet-pc"></span>{{/rollTotal() sheet 1}}
+			{{#rollTotal() sheet 2}}<span class="sheet-npc"></span>{{/rollTotal() sheet 2}}
+			{{#rollTotal() sheet 3}}<span class="sheet-monster"></span>{{/rollTotal() sheet 3}}
+			<div class="sheet-roll-inner">
+				{{#char}}<div class="sheet-char">{{char}}</div>{{/char}}
+				<div class="sheet-roll-name"><strong>{{name}}</strong></div>
+				{{#row1}}<div class="sheet-roll-row">{{row1}}</div>{{/row1}}
+				{{#row2}}<div class="sheet-roll-row">{{row2}}</div>{{/row2}}
+				{{#row3}}<div class="sheet-roll-row">{{row3}}</div>{{/row3}}
+				{{#row4}}<div class="sheet-roll-row">{{row4}}</div>{{/row4}}
 				{{#desc}}<div class="sheet-roll-desc">{{desc}}</div>{{/desc}}
 			</div>
 		</div>

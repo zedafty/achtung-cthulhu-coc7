@@ -1,0 +1,508 @@
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Theme 1: Achtung! Cthulhu */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Character Sheet */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page *::selection {
+	color: #fff;
+	background-color: #b23;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Page */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page {
+	background-color: #532;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-board.jpg");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Headers */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page h4 {
+	color: #fff;
+	border: 1px solid #4444;
+	background-color: #3303;
+	text-shadow: 0 0 3px #000;
+}
+.theme[value="1"] ~ .page .skills > div h4 {
+	color: #664;
+	border: 0;
+	border-bottom: 4px solid #554;
+	background-color: transparent; /* Combine */
+	text-shadow: none; /* Combine */
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Inputs */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.charsheet .theme[value="1"] ~ .page .main select:not([readonly]):focus,
+.charsheet .theme[value="1"] ~ .page .main textarea:not([readonly]):focus,
+.charsheet .theme[value="1"] ~ .page .main input[type="text"]:not([readonly]):focus,
+.charsheet .theme[value="1"] ~ .page .main input[type="number"]:not([readonly]):focus {
+	background-color: #fff9;
+}
+.charsheet .theme[value="1"] ~ .page .main select:not([readonly]):hover,
+.charsheet .theme[value="1"] ~ .page .main textarea:not([readonly]):hover,
+.charsheet .theme[value="1"] ~ .page .main input[type="text"]:not([readonly]):hover,
+.charsheet .theme[value="1"] ~ .page .main input[type="number"]:not([readonly]):hover {
+	background-color: #ffc;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* Buttons */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main button[type="roll"]:hover,
+.theme[value="1"] ~ .page .main button[type="roll"]:focus {
+	background-color: #f306;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Labels */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main label.caption {
+	color: #664;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Checkboxes */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Switchboxes */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Fieldboxes */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Repeating Controllers */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Option Blocks */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .option-block {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-circle.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Autoexpands */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main .autoexpand > textarea {
+	background-color: #6633;
+	scrollbar-color: #663 #fff6;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Insets */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main .inset {
+	background-color: #eda6;
+}
+.theme[value="1"] ~ .page .main .inset.border {
+	border-left-color: #b23;
+}
+.theme[value="1"] ~ .page .main .inset.border.gray {
+	border-left-color: #554;
+}
+.theme[value="1"] ~ .page .main .inset.border.gray::after {
+	border-color: #554;
+}
+.theme[value="1"] ~ .page .main .inset.border {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dice.png");
+}
+.theme[value="1"] ~ .page .main .inset.insanity {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-insanity.png");
+}
+.theme[value="1"] ~ .page .main .inset.credit-rating {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dollar.png");
+}
+.theme[value="1"] ~ .page .main .inset.cthulhu-mythos {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tentacle.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Modal */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page.active-drop-target .main,
+.theme[value="1"] ~ input[name="attr_settings"][value="1"] ~ .page .main,
+.theme[value="1"] ~ .page input[name="attr_data-prompt"]:not([value="0"]) ~ .main {
+	margin-top: calc(30px - 100vh);
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Settings */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .magic-points + div {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-star.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Main */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main {
+	margin: 30px;
+	border-image-source: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-border-paper.png");
+	border-image-slice: 80;
+	border-image-width: 80px;
+	border-image-outset: 15px;
+	border-image-repeat: round;
+	background: rgb(248,244,224);
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
+	box-shadow: 0 0 10px #000c;
+}
+.theme[value="1"] ~ .page .main::before {
+	content: "";
+	pointer-events: none;
+	display: inline-block;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: -25px;
+	right: -25px;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-corner.png");
+	background-repeat: no-repeat;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Logo */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .logo {
+	left: -6px;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Era */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .headline > .era {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-post-mark.png");
+}
+.theme[value="1"] ~ .page input[name="attr_char-era"][value="modern"] ~ .header .headline .era {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-mythos-mark.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Heading */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page input[name="attr_char-lovecraftian"][value="1"] ~ .header .heading .conditions.char {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-lovecraft.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Tabs */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .tabs label input:hover + span + span,
+.theme[value="1"] ~ .page .tabs label input:hover + span + span::before,
+.theme[value="1"] ~ .page .tabs label input:hover + span + span::after {
+	background-color: #ffcc;
+}
+.theme[value="1"] ~ .page .tabs label input:focus + span + span,
+.theme[value="1"] ~ .page .tabs label input:focus + span + span::before,
+.theme[value="1"] ~ .page .tabs label input:focus + span + span::after {
+	background-color: #fff9;
+}
+.theme[value="1"] ~ .page .tabs label input:checked + span {
+	background-color: transparent;
+}
+
+.theme[value="1"] ~ .page .tabs label input:hover + span::after,
+.theme[value="1"] ~ .page .tabs label input:checked + span::after {
+	content: "";
+	position: absolute;
+	width: 30px;
+	height: 50px;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-clip.png");
+	background-repeat: no-repeat;
+	transition: top .25s, left .25s, opacity .125s, transform .25s;
+}
+.theme[value="1"] ~ .page .tabs label input:hover + span::after {
+	top: -20px;
+	left: -10px;
+	opacity: 0;
+	transform: rotate(45deg);
+}
+.theme[value="1"] ~ .page .tabs label input:checked + span::after {
+	top: -5px;
+	left: 0;
+	opacity: 1;
+	transform: rotate(0);
+}
+.theme[value="1"] ~ .page .tabs label input + span + span::before,
+.theme[value="1"] ~ .page .tabs label input + span + span::after {
+	content: "";
+	position: absolute;
+	width: 20px;
+	height: 40px;
+	top: 0;
+	background-repeat: no-repeat;
+}
+.theme[value="1"] ~ .page .tabs label input + span + span::before {
+	left: -20px;
+}
+.theme[value="1"] ~ .page .tabs label input + span + span::after {
+	right: -20px;
+}
+.theme[value="1"] ~ .page .tabs label input:checked + span + span {
+	text-shadow: 0 1px 0 #fff;
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-center.png");
+	background-repeat: repeat-x;
+}
+.theme[value="1"] ~ .page .tabs label input:checked + span + span::before {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-left.png");
+}
+.theme[value="1"] ~ .page .tabs label input:checked + span + span::after {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-right.png");
+}
+.theme[value="1"] ~ .page .tabs label input:hover + span + span,
+.theme[value="1"] ~ .page .tabs label input:hover + span + span::before,
+.theme[value="1"] ~ .page .tabs label input:hover + span + span::after {
+	background-color: #ffc;
+}
+.theme[value="1"] ~ .page .tabs label input:focus + span + span,
+.theme[value="1"] ~ .page .tabs label input:focus + span + span::before,
+.theme[value="1"] ~ .page .tabs label input:focus + span + span::after {
+	background-color: #fd0;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Body */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Skills */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+/* Skill Grid */
+.theme[value="1"] ~ .page .skills > .skill-grid::before {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
+}
+
+/* Skill Advancement Marks */
+.theme[value="1"] ~ .page .skills .inset > .adv:hover + span,
+.theme[value="1"] ~ .page .skills .inset > .adv:focus + span {
+	box-shadow: 0 0 2px 3px #b236;
+}
+.theme[value="1"] ~ .page .skills .inset > .adv:focus + span {
+	background-color: #fff9;
+}
+.theme[value="1"] ~ .page .skills .inset > .adv:hover + span {
+	background-color: #ffc;
+}
+.theme[value="1"] ~ .page .skills .inset > .adv:checked + span {
+	background-color: #b23;
+}
+
+/* Skill Occupation Marks */
+.theme[value="1"] ~ .page .skills .inset > input[type="checkbox"].occ + span {
+	color: #6649;
+}
+.theme[value="1"] ~ .page .skills .inset > input[type="checkbox"].occ:hover + span,
+.theme[value="1"] ~ .page .skills .inset > input[type="checkbox"].occ:focus + span {
+	color: #333;
+}
+.theme[value="1"] ~ .page .skills .inset > input[type="checkbox"].occ:checked + span {
+	color: #fff;
+}
+
+/* Skill Pictos */
+.theme[value="1"] ~ .page .skills .picto::before {
+	color: #663;
+}
+
+/* Skill Head */
+.theme[value="1"] ~ .page .skill-head {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-typewriter-right.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-typewriter-left.png");
+}
+
+/* Skill Action Buttons */
+.theme[value="1"] ~ .page .skills button[type="action"] {
+	background-color: #eda6;
+}
+.theme[value="1"] ~ .page .skills button[type="action"]:hover {
+	background-color: #fd0;
+}
+.theme[value="1"] ~ .page .skills button[type="action"]:focus {
+	background-color: #fff9;
+}
+.theme[value="1"] ~ .page .skills button[type="action"]:active {
+	background-color: #f90;
+}
+
+/* Skill Count */
+.theme[value="1"] ~ .page .skill-count > span {
+	background-color: #6633;
+}
+.theme[value="1"] ~ .page .skill-count > label.check input:checked + span {
+	background-color: #b23;
+}
+.theme[value="1"] ~ .page .skill-count > label.check input:focus + span {
+	background-color: #fff9;
+}
+.theme[value="1"] ~ .page .skill-count > label.check input:hover + span {
+	background-color: #ffcc;
+}
+
+/* Skill Points */
+.theme[value="1"] ~ .page .skill-points {
+	border-color: #6643;
+	background: #6853;
+}
+.theme[value="1"] ~ .page .skill-points select {
+	background-color: #6643;
+}
+.theme[value="1"] ~ .page .skill-points span.num {
+	background-color: #6643;
+}
+.theme[value="1"] ~ .page .skill-points span.lft {
+	border-color: #6646;
+	background-color: #fff6;
+}
+.theme[value="1"] ~ .page .skill-points input[type="hidden"][value^="-"] + span {
+	background-color: #fe09;
+}
+
+/* Skill Occupation Text */
+.theme[value="1"] ~ .page .skill-occupation .autoexpand {
+	outline-color: #5546;
+}
+.theme[value="1"] ~ .page .skill-occupation .autoexpand > textarea {
+	background-color: #cb96;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Possessions */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .money > .inset {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dollar.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Talents */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .talent-block {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-weird-tales-september.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-weird-tales-december.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Notes */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .notes input[name="attr_flag"][value="1"] + .inset {
+	background-color: #b233;
+}
+.theme[value="1"] ~ .page .note-block {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-papers-left.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-papers-right.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Monster */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .conditions.mons {
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-monster.png");
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Edit Inputs */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .main select.edit-field,
+.theme[value="1"] ~ .page .main input[type="text"].edit-field,
+.theme[value="1"] ~ .page .main input[type="number"].edit-field {
+	background-color: #6633;
+}
+.theme[value="1"] ~ .page .main input[type="text"].edit-false {
+	border-color: #9236;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Edit Mode */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.theme[value="1"] ~ .page .edit[value="1"] ~ div .inset {
+	background-color: #cb96;
+}
+.theme[value="1"] ~ .page .edit[value="1"] ~ div .inset.border:not(.gray) {
+	border-left-color: #554;
+}

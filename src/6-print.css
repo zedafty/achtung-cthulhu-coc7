@@ -1,0 +1,331 @@
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Print */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+@media print {
+
+	/* Roll20 */
+	html,
+	body,
+	.ui-dialog,
+	.characterviewer,
+	.tab-content,
+	.sheetform,
+	.charactersheet {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	.ui-dialog {
+		position: inherit !important;
+	}
+	#macrobar,
+	.nav-tabs,
+	.repcontrol {
+		display: none !important;
+	}
+
+	/* Visibility */
+	.modbar,
+	.tabs,
+	.footer {
+		display: none;
+	}
+	.headline .era {
+		display: none !important;
+	}
+	input[name="attr_tab"] ~ .body > .profile,
+	input[name="attr_tab"] ~ .body > .skills,
+	input[name="attr_tab"] ~ .body > .combat,
+	input[name="attr_tab"] ~ .body > .spells,
+	input[name="attr_tab"] ~ .body > .gear-possessions,
+	input[name="attr_tab"] ~ .body > .talents,
+	input[name="attr_tab"] ~ .body > .notes,
+	input[name="attr_show-all"] ~ .body > div h4.show-all {
+		display: block;
+	}
+
+	/* Page Breaks */
+	input[name="attr_tab"] ~ .body > .combat,
+	input[name="attr_tab"] ~ .body > .spells,
+	input[name="attr_tab"] ~ .body > .gear-possessions,
+	input[name="attr_tab"] ~ .body > .talents,
+	input[name="attr_tab"] ~ .body > .notes {
+		page-break-inside: avoid;
+	}
+
+	/* Mark-ups */
+	abbr[title] {
+		text-decoration: none;
+	}
+	abbr[title]::after {
+		content: "";
+	}
+
+	/* Page */
+	.page {
+		min-width: unset;
+		max-width: 100vh;
+		border: 0;
+	}
+	.page .main {
+		padding: 0;
+	}
+
+	/* Borders */
+	.page .main *,
+	.page .main *::before,
+	.page .main *::after {
+		border-color: #999 !important;
+	}
+	.page .main .inset.border {
+		border-left-width: 1px;
+	}
+	.page .main input[type="text"].edit-false,
+	.page .main input[type="number"].edit-false {
+		border: 0;
+	}
+	.page .main .skills .inset > .edit-field.min,
+	.page .main .skills .inset > .edit-field.max {
+		border-left-width: 1px;
+		border-left-style: solid;
+	}
+	.page .main .skills .inset.border.gray::after {
+		width: calc(100% - 14px);
+		left: 7px;
+	}
+
+	/* Backgrounds */
+	.skills > .skill-grid::before,
+	.heading .conditions .switchbox.cap input[type="number"] {
+		background-color: #fff !important;
+	}
+	.skills .inset > .adv:checked + span {
+		background-color: #999 !important;
+	}
+
+	/* Dimensions */
+	.skill-points {
+		width: 75%;
+	}
+
+	/* Option Blocks */
+	.page .checkbox.option input[type="checkbox"],
+	.page .checkbox.option input[type="checkbox"] + span {
+		display: none;
+	}
+
+	/* Edit Mode */
+	.edit[value="1"] ~ div .inset {
+		border-style: solid;
+	}
+	.edit[value="1"] ~ div textarea::placeholder,
+	.edit[value="1"] ~ div input[type="text"]::placeholder {
+		opacity: 0;
+	}
+	.edit[value="1"] ~ .body .skills .inset > input[type="text"] {
+		width: 80px;
+	}
+	.edit[value="1"] ~ .body .skills .inset > .avl,
+	.edit[value="1"] ~ .body .skills .inset > .avl + span,
+	.edit[value="1"] ~ .body .skills .inset > input[type="checkbox"].occ,
+	.edit[value="1"] ~ .body .skills .inset > input[type="checkbox"].occ + span,
+	.edit[value="1"] ~ .body .skills .skill-head button[type="action"],
+	.edit[value="1"] ~ .body .skills .skill-ctrl {
+		display: none;
+	}
+	.edit[value="1"] ~ .body .skills .skill-legend {
+		display: block;
+	}
+	.edit[value="1"] ~ .body .skills .inset > .adv,
+	.edit[value="1"] ~ .body .skills .inset > .adv + span {
+		display: inline-block;
+	}
+	.edit[value="1"] ~ .body .skills .credit-rating,
+	.edit[value="1"] ~ .body .skills .cthulhu-mythos {
+		padding-left: 28px;
+	}
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-accounting-avl"][value="0"] ~ div .accounting,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-aeronautical-systems-avl"][value="0"] ~ div .aeronautical-systems,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-animal-handling-avl"][value="0"] ~ div .animal-handling,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-anthropology-avl"][value="0"] ~ div .anthropology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-appraise-avl"][value="0"] ~ div .appraise,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-archaeology-avl"][value="0"] ~ div .archaeology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-avl"][value="0"] ~ div .artcraft:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-acting-avl"][value="0"] ~ div .artcraft-acting,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-fine-art-avl"][value="0"] ~ div .artcraft-fine-art,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-forgery-avl"][value="0"] ~ div .artcraft-forgery,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-photography-avl"][value="0"] ~ div .artcraft-photography,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom1-avl"][value="0"] ~ div .artcraft-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom2-avl"][value="0"] ~ div .artcraft-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-artillery-avl"][value="0"] ~ div .artillery,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-charm-avl"][value="0"] ~ div .charm,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-clairvoyance-avl"][value="0"] ~ div .clairvoyance,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-climb-avl"][value="0"] ~ div .climb,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-combat-engineer-avl"][value="0"] ~ div .combat-engineer,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-command-avl"][value="0"] ~ div .command,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-comptography-avl"][value="0"] ~ div .comptography,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-credit-rating-avl"][value="0"] ~ div .credit-rating,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-cthulhu-mythos-avl"][value="0"] ~ div .cthulhu-mythos,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-damage-control-avl"][value="0"] ~ div .damage-control,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-demolitions-avl"][value="0"] ~ div .demolitions,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-disguise-avl"][value="0"] ~ div .disguise,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-divination-avl"][value="0"] ~ div .divination,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-diving-avl"][value="0"] ~ div .diving,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-dodge-avl"][value="0"] ~ div .dodge,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-drive-auto-avl"][value="0"] ~ div .drive-auto,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-drive-tracked-avl"][value="0"] ~ div .drive-tracked,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-electrical-repair-avl"][value="0"] ~ div .electrical-repair,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-espionage-avl"][value="0"] ~ div .espionage,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fast-talk-avl"][value="0"] ~ div .fast-talk,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fieldcraft-avl"][value="0"] ~ div .fieldcraft,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-avl"][value="0"] ~ div .fighting:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-axe-avl"][value="0"] ~ div .fighting-axe,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-brawl-avl"][value="0"] ~ div .fighting-brawl,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-chainsaw-avl"][value="0"] ~ div .fighting-chainsaw,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-flail-avl"][value="0"] ~ div .fighting-flail,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-garrote-avl"][value="0"] ~ div .fighting-garrote,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-spear-avl"][value="0"] ~ div .fighting-spear,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-sword-avl"][value="0"] ~ div .fighting-sword,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-whip-avl"][value="0"] ~ div .fighting-whip,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-custom1-avl"][value="0"] ~ div .fighting-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-custom2-avl"][value="0"] ~ div .fighting-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-avl"][value="0"] ~ div .firearms:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-bow-avl"][value="0"] ~ div .firearms-bow,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-flamethrower-avl"][value="0"] ~ div .firearms-flamethrower,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-handgun-avl"][value="0"] ~ div .firearms-handgun,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-heavy-weapon-avl"][value="0"] ~ div .firearms-heavy-weapon,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-machine-gun-avl"][value="0"] ~ div .firearms-machine-gun,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-rifle-shotgun-avl"][value="0"] ~ div .firearms-rifle-shotgun,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-submachine-gun-avl"][value="0"] ~ div .firearms-submachine-gun,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-custom1-avl"][value="0"] ~ div .firearms-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-custom2-avl"][value="0"] ~ div .firearms-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-first-aid-avl"][value="0"] ~ div .first-aid,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-folklore-avl"][value="0"] ~ div .folklore,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-history-avl"][value="0"] ~ div .history,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-hypnosis-avl"][value="0"] ~ div .hypnosis,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-institutional-lore-avl"][value="0"] ~ div .institutional-lore,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-intimidate-avl"][value="0"] ~ div .intimidate,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-jump-avl"][value="0"] ~ div .jump,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-jury-rig-avl"][value="0"] ~ div .jury-rig,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-avl"][value="0"] ~ div .language:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-own-avl"][value="0"] ~ div .language-own,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other1-avl"][value="0"] ~ div .language-other1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other2-avl"][value="0"] ~ div .language-other2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other3-avl"][value="0"] ~ div .language-other3,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other4-avl"][value="0"] ~ div .language-other4,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other5-avl"][value="0"] ~ div .language-other5,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other6-avl"][value="0"] ~ div .language-other6,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-law-avl"][value="0"] ~ div .law,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-library-use-avl"][value="0"] ~ div .library-use,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-listen-avl"][value="0"] ~ div .listen,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-locksmith-avl"][value="0"] ~ div .locksmith,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-avl"][value="0"] ~ div .lore:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-1-avl"][value="0"] ~ div .lore-1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-2-avl"][value="0"] ~ div .lore-2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-3-avl"][value="0"] ~ div .lore-3,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-4-avl"][value="0"] ~ div .lore-4,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-mechanical-repair-avl"][value="0"] ~ div .mechanical-repair,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-medicine-avl"][value="0"] ~ div .medicine,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-medium-avl"][value="0"] ~ div .medium,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-military-doctrine-avl"][value="0"] ~ div .military-doctrine,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-natural-world-avl"][value="0"] ~ div .natural-world,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-navigate-avl"][value="0"] ~ div .navigate,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-occult-avl"][value="0"] ~ div .occult,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-operate-heavy-machinery-avl"][value="0"] ~ div .operate-heavy-machinery,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-parachute-avl"][value="0"] ~ div .parachute,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-perform-avl"][value="0"] ~ div .perform,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-persuade-avl"][value="0"] ~ div .persuade,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-photo-interpretation-avl"][value="0"] ~ div .photo-interpretation,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-avl"][value="0"] ~ div .pilot:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-aircraft-avl"][value="0"] ~ div .pilot-aircraft,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-boat-avl"][value="0"] ~ div .pilot-boat,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-custom1-avl"][value="0"] ~ div .pilot-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-custom2-avl"][value="0"] ~ div .pilot-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-psychoanalysis-avl"][value="0"] ~ div .psychoanalysis,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-psychology-avl"][value="0"] ~ div .psychology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-psychometry-avl"][value="0"] ~ div .psychometry,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-radio-operator-avl"][value="0"] ~ div .radio-operator,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-read-lips-avl"][value="0"] ~ div .read-lips,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-ride-avl"][value="0"] ~ div .ride,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-ride-motorcycle-avl"][value="0"] ~ div .ride-motorcycle,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-rifle-grenade-avl"][value="0"] ~ div .rifle-grenade,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-rope-use-avl"][value="0"] ~ div .rope-use,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-sabotage-avl"][value="0"] ~ div .sabotage,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-avl"][value="0"] ~ div .science:not(h4),
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-astronomy-avl"][value="0"] ~ div .science-astronomy,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-biology-avl"][value="0"] ~ div .science-biology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-botany-avl"][value="0"] ~ div .science-botany,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-chemistry-avl"][value="0"] ~ div .science-chemistry,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-cryptography-avl"][value="0"] ~ div .science-cryptography,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-enginnering-avl"][value="0"] ~ div .science-enginnering,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-forensics-avl"][value="0"] ~ div .science-forensics,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-geology-avl"][value="0"] ~ div .science-geology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-mathematics-avl"][value="0"] ~ div .science-mathematics,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-meteorology-avl"][value="0"] ~ div .science-meteorology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-pharmacy-avl"][value="0"] ~ div .science-pharmacy,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-physics-avl"][value="0"] ~ div .science-physics,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-custom1-avl"][value="0"] ~ div .science-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-science-custom2-avl"][value="0"] ~ div .science-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-scrounge-avl"][value="0"] ~ div .scrounge,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-ski-avl"][value="0"] ~ div .ski,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-sleight-of-hand-avl"][value="0"] ~ div .sleight-of-hand,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-spot-hidden-avl"][value="0"] ~ div .spot-hidden,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-spotter-avl"][value="0"] ~ div .spotter,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-stealth-avl"][value="0"] ~ div .stealth,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-surgery-avl"][value="0"] ~ div .surgery,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-survival-avl"][value="0"] ~ div .survival,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-swim-avl"][value="0"] ~ div .swim,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-tactics-avl"][value="0"] ~ div .tactics,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-teach-avl"][value="0"] ~ div .teach,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-telekinesis-avl"][value="0"] ~ div .telekinesis,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-telephony-avl"][value="0"] ~ div .telephony,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-theology-avl"][value="0"] ~ div .theology,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-throw-avl"][value="0"] ~ div .throw,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-torpedo-avl"][value="0"] ~ div .torpedo,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-track-avl"][value="0"] ~ div .track,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom1-avl"][value="0"] ~ div .skill-custom1,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom2-avl"][value="0"] ~ div .skill-custom2,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom3-avl"][value="0"] ~ div .skill-custom3,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom4-avl"][value="0"] ~ div .skill-custom4,
+	.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom5-avl"][value="0"] ~ div .skill-custom5 {
+		border-style: dashed !important;
+	}
+
+	/* Theme 1 */
+	.theme[value="1"] ~ .page .logo {
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung-cthulhu-bw.png") !important;
+	}
+	.theme[value="1"] ~ .page .main {
+		margin: 0;
+		border-image: none;
+	}
+	.theme[value="1"] ~ .page h4 {
+		border: 0;
+	}
+
+	/* Theme 2 */
+	.theme[value="2"] ~ .page .logo {
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-en-bw.png") !important;
+	}
+	input[name="attr_sheet-lang"][value="fr"] ~ .theme[value="2"] ~ .page .logo {
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-fr-bw.png") !important;
+	}
+	.theme[value="2"] ~ .page .main {
+		margin-top: 0;
+	}
+	.theme[value="2"] ~ .page .header,
+	.theme[value="2"] ~ .page .footer {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.theme[value="2"] ~ .page .header {
+		padding-top: 0;
+	}
+	.theme[value="2"] ~ .page .body {
+		padding: 0;
+		border-top: 0;
+	}
+
+}

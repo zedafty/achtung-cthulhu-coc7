@@ -1,5 +1,5 @@
 {
-	"show-option" : "Monter/masquer les options",
+	"show-option" : "Montrer/masquer les options",
 
 	"lng-new" : "Nouveau",
 	"lng-colon" : " : ",
@@ -111,7 +111,7 @@
 	"pow-tt" : "Test de Pouvoir",
 	"luck" : "Chance",
 	"luck-tt" : "Test de Chance",
-	"luck-point-tt" : "Points de Chance (nombre ou somme comme 10+4 ou 6-3)",
+	"luck-point-tt" : "Points de Chance (nombre ou somme comme 50-4 ou 38+3)",
 
 	"hp-bb" : "PV",
 	"hp" : "Points de vie",
@@ -122,14 +122,16 @@
 	"san-bb" : "SAN",
 	"san" : "Santé mentale",
 	"san-tt" : "Test de Santé mentale",
-	"san-point-tt" : "Points de Santé mentale (nombre ou somme comme 10+4 ou 6-3)",
+	"san-point-tt" : "Points de Santé mentale (nombre ou somme comme 50-4 ou 38+3)",
 
-	"state" : "État",
+	"state" : "État", // UNUSED
+	"state-major-wound" : "Blessure grave", // NEW
 	"state-unconscious" : "Inconscient",
 	"state-dying" : "Mourant",
 	"insanity" : "Folie",
 	"insanity-temporary" : "Temporaire",
 	"insanity-indefinite" : "Persistante",
+	"insanity-indefinite-tt" : "Recalculer le seuil de Folie persistante", // NEW
 
 	"tab-profile" : "Profil",
 	"tab-skills" : "Compétences",
@@ -543,10 +545,10 @@
 
 	"init" : "Initiative",
 	"dodge" : "Esquive",
-	"move" : "Mouvement",
 	"move-bb" : "MVT",
-	"dmg-bon" : "Dégâts bonus",
+	"move" : "Mouvement",
 	"dmg-bon-bb" : "Impact",
+	"dmg-bon" : "Dégâts bonus",
 	"build" : "Carrure",
 	"arm-type" : "Type d’armure",
 	"arm-type-pl" : "Mk. I Brodie",
@@ -554,6 +556,7 @@
 
 	"wpn-name" : "Arme",
 	"wpn-name-pl" : "Nom de l’arme",
+	"wpn-score" : "Score", // NEW
 	"wpn-skill" : "Compétence",
 	"wpn-dmg" : "Dégâts",
 	"wpn-dmg-pl" : "2d6+4",
@@ -573,7 +576,7 @@
 	"wpn-dmg-bon" : "Impact",
 	"wpn-dmg-bon-tt" : "L’Impact du personnage est ajouté aux dégâts de l’arme",
 	"wpn-dmg-bon-half" : "1/2 Impact",
-	"wpn-dmg-bon-half-tt" : "La moitié de l’Impact du personnage est ajouté aux dégâts de l’arme",
+	"wpn-dmg-bon-half-tt" : "La moitié de l’Impact du personnage est ajoutée aux dégâts de l’arme",
 	"wpn-impale" : "Empale",
 	"wpn-impale-tt" : "L’arme inflige les dégâts maximums et les dégâts normaux en cas de réussite Extrême",
 	"wpn-explode" : "Explose",
@@ -585,7 +588,7 @@
 	"wpn-stun" : "Étourdit",
 	"wpn-stun-tt" : "Le choc de l’arme empêche la cible d’agir durant 1D6 rounds",
 
-	"wpn-type-hand-to-hand" : "Arme blanche",
+	"wpn-type-hand-to-hand" : "Arme blanche ou de trait", // EDIT
 	"wpn-type-handgun" : "Arme de poing",
 	"wpn-type-rifle" : "Fusil",
 	"wpn-type-shotgun" : "Fusil de chasse",
@@ -596,11 +599,12 @@
 	"wpn-type-heavy-weapon" : "Arme lourde",
 
 	"wpn-skill-list" : "fighting-brawl,fighting-sword,fighting-flail,fighting-whip,fighting-garrote,fighting-axe,fighting-spear,fighting-chainsaw,fighting-custom1,fighting-custom2,firearms-bow,firearms-handgun,firearms-heavy-weapon,firearms-rifle-shotgun,firearms-flamethrower,firearms-submachine-gun,firearms-machine-gun,firearms-custom1,firearms-custom2,artillery,demolitions,throw",
-	"wpn-rng-list" : "cm,m,km,ft,yd,mi",
+	"wpn-rng-list" : "nil,cm,m,km,ft,yd,mi", // EDIT
 	"wpn-rng-touch" : "Allonge",
 	"wpn-mag-type" : "Types de chargeur",
 
-	"u-ft" : "ft",
+	"u-nil" : "–", // NEW
+	"u-ft" : "pi",
 	"u-y" : "y",
 	"u-yd" : "yd",
 	"u-cm" : "cm",
@@ -623,9 +627,9 @@
 	"spl-name" : "Sort",
 	"spl-name-pl" : "Nom du sort",
 	"spl-cost-mp" : "Coût PM",
-	"spl-cost-mp-pl" : "1d10",
+	"spl-cost-mp-pl" : "1D10",
 	"spl-cost-san" : "Coût SAN",
-	"spl-cost-san-pl" : "1d4",
+	"spl-cost-san-pl" : "1D4",
 	"spl-cost-other" : "Autre Coût",
 	"spl-cost-other-pl" : "2 POU",
 	"spl-cast-time-bb" : "TI",
@@ -654,6 +658,7 @@
 	"money" : "Argent",
 	"spending-lvl" : "Dépenses courantes",
 	"cash" : "Espèces",
+	"cash-tt" : "Espèces en dollars (nombre ou somme comme 500-40 ou 380+30)",
 	"assets" : "Capital",
 	"asset-name-pl" : "Nom de l’actif",
 	"asset-desc" : "Description",
@@ -724,7 +729,7 @@
 	"atk-desc-pl" : "Description…",
 	"atk-score" : "Score",
 	"atk-dmg" : "Dégâts",
-	"atk-dmg-pl" : "1d6+2",
+	"atk-dmg-pl" : "1D6+2",
 	"atk-db-bb" : "Imp.",
 	"atk-db" : "Impact",
 	"atk-type" : "Type d’attaque",
@@ -753,12 +758,17 @@
 	"show-talents-tt" : "Voir l’onglet des talents (Pulp Cthulhu)",
 	"show-scores" : "Voir scores",
 	"show-scores-tt" : "Voir les scores de caractéristiques et de compétences dans la fenêtre de discussion",
+	"sheet-theme" : "Thème",
+	"sheet-theme-achtung-cthulhu" : "Achtung! Cthulhu",
+	"sheet-theme-call-of-cthulhu" : "L’Appel de Cthulhu",
 	"reload-translation" : "Recharger traduction",
 	"reload-translation-tt" : "Recharger les données de traduction de la fiche de personnage",
 
 	"sheet-type-investigator" : "Investigateur",
-	"sheet-type-achtung-pc" : " PJ Achtung !",
-	"sheet-type-achtung-npc" : "PNJ Achtung !",
+	//"sheet-type-achtung-pc" : " PJ Achtung !", // DEPRECATED
+	//"sheet-type-achtung-npc" : "PNJ Achtung !", // DEPRECATED
+	"sheet-type-pc" : "PJ",
+	"sheet-type-npc" : "PNJ",
 	"sheet-type-monster" : "Créature",
 
 	"char-era" : "Époque",
@@ -770,7 +780,7 @@
 	"char-era-1920-tt" : "L’Appel de Cthulhu (Classique)",
 	"char-era-1930" : "Années 1930",
 	"char-era-1930-tt" : "Pulp Cthulhu",
-	"char-era-1940" : "Années 1940 ",
+	"char-era-1940" : "Années 1940", // EDIT
 	"char-era-1940-tt" : "Achtung ! Cthulhu",
 	"char-era-modern" : "Moderne",
 	"char-lovecraftian" : "Lovecraftienne",
@@ -812,10 +822,12 @@
 	"tpl-critical-success" : "Réussite critique !",
 	"tpl-critical-failure" : "Échec critique…",
 	"tpl-critical-hit" : "Coup critique !",
+	"tpl-malfunction" : "Panne !",
 	"tpl-fumble" : "Maladresse…",
-	"tpl-malfunction" : "Panne!",
 	"tpl-damage" : "Dégâts",
-	"tpl-impale" : "Empale",
+	"tpl-damage-extreme" : "Dégâts extrêmes", // NEW
+	"tpl-damage-none" : "Pas de dégât…", // NEW
+	//"tpl-impale" : "Empale", // DEPRECATED
 	"tpl-burn" : "Test de Chance ou prendre feu",
 	"tpl-strangle" : "Manœuvre de combat pour s’évader",
 	"tpl-round" : "round",
@@ -833,7 +845,9 @@
 	"prompt-cancel" : "Annuler",
 
 	"json-sheet-type" : "Type de fiche ?",
-	"json-sheet-type-desc" : "Définit le type de fiche par défaut. Les caractéristiques des Investigateurs et des PJ ne peuvent pas dépasser 100, tandis que celles des PNJ et des Créatures le peuvent. Cette option peut être changée plus tard sous la section “Paramètres”.",
+	"json-sheet-type-desc" : "Définit le type de fiche par défaut. Les caractéristiques des personnages joueurs ne peuvent pas dépasser 99 (excepté pour la Taille et le Pouvoir), tandis que celles des personnages non-joueurs et des créatures le peuvent. Cette option peut être changée plus tard sous la section “Paramètres”.",
+	"json-sheet-theme" : "Thème de fiche?", // NEW
+	"json-sheet-theme-desc" : "Définit le thème de fiche par défaut. Ceci changera l’agencement de la fiche et le logo affiché mais pas la barre des modificateurs ni les gabarits de jets de la fenêtre de discussion. Cette option peut être changée plus tard sous la section “Paramètres”.", // NEW
 	"json-show-all" : "Voir tous les onglets ?",
 	"json-show-all-desc" : "Si coché, les fiches de personnage nouvellement créées n’utiliseront pas les onglets par défaut et seront affichées d’un seul bloc (càd. sur une seule page). Cette option peut être changée plus tard sous la section “Paramètres”.",
 	"json-show-magic" : "Voir la magie ?",
@@ -846,6 +860,8 @@
 	"json-wgm-desc" : "Si coché, les fiches de personnage nouvellement créées ne sortiront les jets dans la fenêtre de discussion que pour le MJ et le joueur par défaut. Les autres joueurs ne verront pas les jets. Cette option est commutable en cliquant sur “Murmurer” dans la barre du haut.",
 	"json-edit-mode" : "Mode édition ?",
 	"json-edit-mode-desc" : "Si coché, les champs des fiches de personnage nouvellement créées seront éditables par défaut. Cette option est commutable en cliquant sur “Éditer” dans la barre du haut.",
+	"json-add-empty-rows" : "Ajouter des rangées vides?", // NEW
+	"json-add-empty-rows-desc" : "Si coché, les sections répétibles des fiches de personnage nouvellement créées seront remplies avec une rangée vide intitulée “Nouveau”.", // NEW
 
 	"legal" : "L’Appel de Cthulhu est une marque déposée de Chaosium Inc. Achtung ! Cthulhu est sous copyright de Modiphius Entertainment Ltd."
 }

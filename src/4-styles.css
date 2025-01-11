@@ -1,26 +1,33 @@
 /* Achtung! Cthulhu (CoC 7th) Character Sheet CSS */
 /* Coding by Zedafty */
-/* Version 1.02 */
+/* Version 1.03 */
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
-/* # Web Font */
+/* # Character Sheet */
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Special+Elite");
-@import url("https://fonts.googleapis.com/css2?family=Besley");
+.charsheet * {
+	box-sizing: border-box;
+}
+.charsheet *::selection {
+	background-color: #fd0;
+}
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
-/* # Sheet */
+/* # Dark Mode */
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
 .sheet-darkmode .charsheet {
 	background-color: #1f1f1f;
 }
-.sheet-darkmode .charsheet label {
+.sheet-darkmode .page {
+	background-color: #fff;
+}
+.sheet-darkmode .page label {
 	color: #222;
 }
 
@@ -36,23 +43,7 @@
 	min-height: 100vh;
 	width: 100%;
 	border: 1px solid #111;
-	background-color: #532;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-board.jpg");
 	box-sizing: content-box;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Globals */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-.charsheet * {
-	box-sizing: border-box;
-}
-.charsheet *::selection {
-	color: #fff;
-	background-color: #b23;
 }
 
 /* ========================================================================== */
@@ -99,17 +90,32 @@ i.icon.large {
 .rollbar button[type="roll"]:hover > i.icon.d100,
 .rollbar button[type="roll"]:focus > i.icon.d100 {background-position: -64px -96px;}
 
-input[name="attr_sheet-type"][value="1"] ~ .page i.icon.large {
-	background-position: 0 0;
-}
-input[name="attr_sheet-type"][value="2"] ~ .page i.icon.large {
+.type[value="1"] + .theme[value="1"] ~ .page i.icon.large {
 	background-position: -40px 0;
 }
-input[name="attr_sheet-type"][value="3"] ~ .page i.icon.large {
+.type[value="1"] + .theme[value="2"] ~ .page i.icon.large {
+	background-position: 0 0;
+}
+.type[value="2"] + .theme[value="1"] ~ .page i.icon.large {
+	background-position: -40px -80px;
+}
+.type[value="2"] + .theme[value="2"] ~ .page i.icon.large {
+	background-position: 0 -80px;
+}
+.type[value="3"] + .theme[value="1"] ~ .page i.icon.large {
 	background-position: -80px 0;
 }
-input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
+.type[value="3"] + .theme[value="2"] ~ .page i.icon.large {
 	background-position: -120px 0;
+}
+.type[value="1"] + .theme[value="2"] ~ .page .main i.icon.large {
+	background-position: 0 -40px;
+}
+.type[value="2"] + .theme[value="2"] ~ .page .main i.icon.large {
+	background-position: 0 -120px;
+}
+.type[value="3"] + .theme[value="2"] ~ .page .main i.icon.large {
+	background-position: -120px -40px;
 }
 
 /* ========================================================================== */
@@ -121,14 +127,16 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .charsheet h4 {
 	margin: 8px 0;
 	padding: 8px 6px 4px;
-	color: #fff;
 	font-size: 18px;
 	font-family: "Special Elite", serif;
 	font-weight: normal;
 	text-align: center;
-	border: 1px solid #4444;
-	background-color: #3303;
-	text-shadow: 0 0 3px #000;
+}
+.skills > div h4 {
+	height: 30px;
+	line-height: 16px;
+	margin: 0 8px;
+	border-bottom: 4px solid #666;
 }
 
 /* ========================================================================== */
@@ -232,7 +240,7 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .charsheet .page input[type="number"]:not([readonly]):focus {
 	color: #111;
 	border-color: #4446;
-	background-color: #fff9;
+	background-color: #fe6;
 }
 .charsheet .page select:not([readonly]):hover,
 .charsheet .page textarea:not([readonly]):hover,
@@ -281,7 +289,7 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 }
 .page button[type="roll"]:hover,
 .page button[type="roll"]:focus {
-	background-color: #f306;
+	background-color: #6663;
 }
 
 /* ========================================================================== */
@@ -306,7 +314,6 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .page label.caption {
 	padding: 0 4px;
 	line-height: 24px;
-	color: #664;
 }
 
 /* ========================================================================== */
@@ -358,7 +365,7 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	width: 100%;
 }
 
-/* Checkbox Checkmark */
+/* Checkbox Checkmarks */
 .page .checkbox.checkmark label {
 	display: inline-block;
 	width: auto;
@@ -390,7 +397,7 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	background-color: #ffc;
 }
 
-/* Checkbox Option */
+/* Checkbox Options */
 .page .checkbox.option {
 	z-index: 2;
 }
@@ -463,6 +470,10 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .switchbox input:checked + strong.orange {
 	background-color: #d53;
 }
+.switchbox input:checked + strong.yellow {
+	color: inherit;
+	background-color: #ec3;
+}
 .switchbox input:checked + strong.purple {
 	background-color: #846;
 }
@@ -489,6 +500,10 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .switchbox input:checked:hover + strong.orange,
 .switchbox input:checked:focus + strong.orange {
 	background-color: #b42;
+}
+.switchbox input:checked:hover + strong.yellow,
+.switchbox input:checked:focus + strong.yellow {
+	background-color: #da3;
 }
 .switchbox input:checked:hover + strong.purple,
 .switchbox input:checked:focus + strong.purple {
@@ -587,6 +602,13 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .switchbox.select.large select {
 	padding-left: 0;
 	line-height: 74px;
+}
+.switchbox.select.long select {
+	width: 180px;
+}
+.switchbox.select.long strong {
+	margin-left: -60px;
+	left: -120px;
 }
 
 /* ========================================================================== */
@@ -783,12 +805,6 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	content: "W";
 }
 .charsheet .repcontrol .repcontrol_add:hover::before,
-.charsheet .repcontrol .repcontrol_edit:hover::before,
-.charsheet .repcontrol .repcontrol_add:focus::before,
-.charsheet .repcontrol .repcontrol_edit:focus::before {
-}
-.charsheet .editmode + .repcontrol .repcontrol_edit::before,
-.charsheet .repcontrol .repcontrol_add:hover::before,
 .charsheet .repcontrol .repcontrol_edit:hover::before {
 	color: #fff;
 	background-color: #b23;
@@ -905,7 +921,6 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	grid-column-gap: 4px;
 }
 .option-block {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-circle.png");
 	background-repeat: no-repeat;
 	background-position: -100px 0;
 }
@@ -973,7 +988,8 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	height: 100%;
 	top: 0;
 	left: 0;
-	background-color: #6633;
+	background-color: #6663;
+	scrollbar-color: #666 #fff;
 	resize: unset;
 }
 
@@ -997,27 +1013,25 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 .page .main .inset {
 	position: relative;
 	border: 1px solid #4446;
-	background-color: #eda6;
 }
 .page .main .inset.border {
-	border-left: 4px solid #b23;
+	border-left-width: 4px;
+	border-left-color: #aaa;
 }
 .page .main .inset.border.gray {
-	border-left-color: #554;
+	border-left-color: #666;
 }
 .page .main .inset.border.gray::after {
 	content: "";
 	display: inline-block;
 	position: absolute;
 	width: calc(100% - 11px);
-	height: 7px;
-	top: -8px;
+	height: 6px;
+	top: -7px;
 	left: 4px;
 	border-width: 0 4px;
 	border-style: solid;
-	border-color: #554;
-	border-top: 1px solid #4433;
-	background-color: #fd03;
+	border-color: #666;
 	box-sizing: border-box;
 	z-index: 1;
 }
@@ -1025,20 +1039,16 @@ input[name="attr_sheet-type"][value="4"] ~ .page i.icon.large {
 	margin: 4px 0;
 }
 .page .main .inset.border {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dice.png");
 	background-repeat: no-repeat;
 	background-position: -25px -25px;
 }
 .page .main .inset.insanity {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-insanity.png");
 	background-position-y: center;
 }
 .page .main .inset.credit-rating {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dollar.png");
 	background-position: -15px -25px;
 }
 .page .main .inset.cthulhu-mythos {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tentacle.png");
 	background-position: -25px -10px;
 }
 
@@ -1347,7 +1357,7 @@ input[name="attr_settings"][value="1"] ~ .page.active-drop-target .modal button[
 .page.active-drop-target .main,
 .page input[name="attr_data-prompt"]:not([value="0"]) ~ .main,
 input[name="attr_settings"][value="1"] ~ .page .main {
-	margin-top: calc(30px - 100vh);
+	margin-top: -100vh;
 }
 input[name="attr_data-prompt"][value="2"] ~ .modal .prompt .button-bar button[name="act_data-confirm"],
 input[name="attr_data-prompt"][value="3"] ~ .modal .prompt .button-bar button[name="act_data-confirm"],
@@ -1448,12 +1458,17 @@ input[name="attr_data-prompt"][value="3"] ~ .modal .prompt .button-bar button[na
 .settings button[type="action"]:active {
 	box-shadow: 0 0 2px #3336 inset;
 }
+.page .settings select:not([readonly]):focus {
+	background-color: #fff9;
+}
+.page .settings select:not([readonly]):hover {
+	background-color: #ffc;
+}
 .magic-points {
 	display: none;
 }
 .magic-points + div {
 	min-height: 42px;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-star.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	opacity: .25;
@@ -1462,10 +1477,10 @@ input[name="attr_show-magic"][value="0"] ~ .body > .spells,
 input[name="attr_show-magic"][value="0"] ~ .tabs .tab-spells,
 input[name="attr_show-talents"][value="0"] ~ .body > .talents,
 input[name="attr_show-talents"][value="0"] ~ .tabs .tab-talents,
-input[name="attr_show-magic"][value="1"] ~ .heading > .points .magic-points + div {
+input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-points + div {
 	display: none;
 }
-input[name="attr_show-magic"][value="1"] ~ .heading > .points .magic-points {
+input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-points {
 	display: block;
 }
 
@@ -1510,59 +1525,93 @@ input[name="attr_show-magic"][value="1"] ~ .heading > .points .magic-points {
 .main {
 	position: relative;
 	min-height: 500px;
-	margin: 30px;
 	padding: 10px;
 	font-size: 0;
-	border-image-source: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-border-paper.png");
-	border-image-slice: 80;
-	border-image-width: 80px;
-	border-image-outset: 15px;
-	border-image-repeat: round;
-	background: rgb(248,244,224);
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
-	box-shadow: 0 0 10px #000c;
 	z-index: 1;
 }
-.main::before {
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Headline */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.headline::after {
 	content: "";
-	pointer-events: none;
+	display: table;
+	width: 100%;
+}
+.headline > .logo {
+	position: relative;
 	display: inline-block;
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	top: -25px;
-	right: -25px;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-corner.png");
+	width: 300px;
+	height: 70px;
+}
+.headline > .sheet-type,
+.headline > .status {
+	float: right;
+	margin-top: 10px;
+}
+.headline > .status {
+	width: calc(100% - 300px);
+}
+.theme:not([value="0"]) ~ .page .headline > .status {
+	width: calc(100% - 348px);
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Logo */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.logo {
 	background-repeat: no-repeat;
 }
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
-/* # Header */
+/* # Sheet Type */
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
-.header::after {
-	content: "";
-	display: table;
-	width: 100%;
+.headline .sheet-type {
+	display: none;
+	width: 48px;
+	height: 48px;
+	vertical-align: top;
 }
-.header > .logo {
-	position: relative;
+.headline .sheet-type i.icon {
+	margin: 4px;
+}
+.theme:not([value="0"]) ~ .page .headline .sheet-type {
 	display: inline-block;
-	width: 300px;
-	height: 70px;
-	left: -6px;
 }
-.header > .sheet-type,
-.header > .status {
-	float: right;
-	margin-top: 10px;
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Status */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.headline .status {
+	display: grid;
+	grid-template-columns: 45% 55%;
 }
-.header > .status {
-	width: calc(100% - 348px);
+.headline .status .edit-field[type="number"],
+.headline .status .number {
+	min-width: 32px;
+	flex-shrink: 2;
 }
-.header > .era {
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Era */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.headline .era {
+	pointer-events: none;
 	display: none;
 	position: absolute;
 	width: 40px;
@@ -1576,64 +1625,21 @@ input[name="attr_show-magic"][value="1"] ~ .heading > .points .magic-points {
 	background-size: contain;
 	opacity: .875;
 }
-.header > .era > span {
+.headline .era > span {
 	display: inline-block;
 	line-height: 40px;
 	font-size: 10px;
 	font-weight: bold;
 	transform: rotate(-12.25deg);
 }
-input[type="hidden"][name="attr_char-era"]:not([value="any"]) ~ .header .era {
+.theme:not([value="0"]) ~ .page input[name="attr_char-era"]:not([value="any"]) ~ .header .headline .era {
 	display: inline-block;
 }
-input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era {
+input[name="attr_char-era"][value="modern"] ~ .header .headline .era {
 	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-mythos-mark.png");
 }
-input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span {
+input[name="attr_char-era"][value="modern"] ~ .header .headline .era > span {
 	font-size: 0;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Logo */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-.logo {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung.png");
-	background-repeat: no-repeat;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Sheet Type */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-.header .sheet-type {
-	display: inline-block;
-	width: 48px;
-	height: 48px;
-	vertical-align: top;
-}
-.header .sheet-type i.icon {
-	margin: 4px;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Status */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-.header .status {
-	display: grid;
-	grid-template-columns: 45% 55%;
-}
-.header .status .edit-field[type="number"],
-.header .status .number {
-	min-width: 32px;
-	flex-shrink: 2;
 }
 
 /* ========================================================================== */
@@ -1644,7 +1650,7 @@ input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span
 
 .heading {
 	display: grid;
-	grid-template-columns: 60% 20% auto;
+	grid-template-columns: 55% 20% auto;
 	grid-column-gap: 10px;
 	margin-top: 10px;
 }
@@ -1719,7 +1725,7 @@ input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span
 
 /* Scores */
 .main .heading .scores > div strong {
-	width: 45%;
+	width: 40%;
 }
 .main .heading .scores > div input[type="text"],
 .main .heading .scores > div input[type="text"] + span,
@@ -1732,7 +1738,7 @@ input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span
 .main .heading .scores > div .edit-holder,
 .main .heading .scores > div input[type="number"],
 .main .heading .scores > div input[type="number"] + span {
-	width: 35%;
+	width: 40%;
 }
 .main .heading .scores > div input[type="text"] + span,
 .main .heading .scores > div input[type="number"] + span {
@@ -1821,27 +1827,86 @@ input[type="hidden"][name="attr_char-era"][value="modern"] ~ .header .era > span
 	font-weight: normal;
 	font-family: "Pictos";
 }
+.heading .conditions .switchbox input:checked + strong.yellow::before {
+	color: inherit;
+}
 .heading .conditions .switchbox.insanity input:checked + strong::before {
 	content: "i";
 	font-size: 16px;
 	font-family: "Pictos Three";
 }
+
+/* Conditions Cap */
+.heading .conditions .switchbox.cap input[type="number"],
+.heading .conditions .switchbox.cap button[type="action"] {
+	display: inline-block;
+	position: absolute;
+	left: -8px;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	padding: 0;
+	border-radius: 100%;
+	border: 1px solid transparent;
+}
+.charsheet .heading .conditions .switchbox.cap input[type="number"] {
+	font-size: 10px;
+	color: #fff;
+	border-color: #4446;
+	background-color: #b23;
+	text-shadow: 0 1px 1px #000;
+	box-shadow: 0 -1px 4px 1px #f00 inset;
+	transition: color .5s, background-color .1s;
+	z-index: 1;
+}
+.heading .conditions .switchbox.cap button[type="action"] {
+	line-height: 14px;
+	border-color: transparent;
+	background: none;
+	z-index: 2;
+}
+.heading .conditions .switchbox.cap button[type="action"]::before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	color: #222;
+	font-family: "Pictos";
+	transition: box-shadow .375s;
+}
+.heading .conditions .switchbox.cap button[type="action"]:hover,
+.heading .conditions .switchbox.cap button[type="action"]:focus {
+	border-color: #4446;
+	background-color: #fff;
+}
+.heading .conditions .switchbox.cap button[type="action"]:hover {
+	box-shadow: 0 0 2px #0006;
+}
+.heading .conditions .switchbox.cap button[type="action"]:focus {
+	box-shadow: 0 0 1px #0006 inset;
+}
+.heading .conditions .switchbox.cap button[type="action"]:hover::before,
+.heading .conditions .switchbox.cap button[type="action"]:focus::before {
+	content: "1";
+}
+.heading .conditions .switchbox.cap input[type="checkbox"]:checked ~ input[type="number"],
+.heading .conditions .switchbox.cap input[type="checkbox"]:checked ~ button[type="action"],
+.heading .conditions .switchbox.cap input[type="hidden"][value="0"] ~ button[type="action"] {
+	display: none;
+}
+.charsheet .heading .conditions .switchbox.cap input[type="hidden"][value="1"] ~ input[type="number"] {
+	color: #222;
+	border-color: #b23;
+	background-color: #ec3;
+	text-shadow: unset;
+	box-shadow: 0 -1px 4px 1px #f60 inset;
+}
+
+/* Conditions Character */
 .main .heading .conditions.char {
 	position: relative;
 	background-repeat: no-repeat;
-	background-position: top bottom;
-}
-input[name="attr_sheet-type"][value="1"] ~ .page .heading .conditions.char {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-investigator.png");
-}
-input[name="attr_sheet-type"][value="2"] ~ .page .heading .conditions.char {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-achtung-pc.png");
-}
-input[name="attr_sheet-type"][value="3"] ~ .page .heading .conditions.char {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-achtung-npc.png");
-}
-.page input[name="attr_char-lovecraftian"][value="1"] ~ .heading .conditions.char {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-lovecraft.png");
+	background-position: top center;
 }
 .main .heading [name="attr_health"] ~ .conditions.char::before {
 	pointer-events: none;
@@ -1853,13 +1918,15 @@ input[name="attr_sheet-type"][value="3"] ~ .page .heading .conditions.char {
 	background-position: center;
 	opacity: .375;
 }
-.main .heading [name="attr_health"][value="1"] ~ .conditions.char::before {
+
+/* Conditions Health */
+.theme:not([value="0"]) ~ .page .heading [name="attr_health"][value="1"] ~ .conditions.char::before {
 	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-1.png");
 }
-.main .heading [name="attr_health"][value="2"] ~ .conditions.char::before {
+.theme:not([value="0"]) ~ .page .heading [name="attr_health"][value="2"] ~ .conditions.char::before {
 	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-1.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-2.png");
 }
-.main .heading [name="attr_health"][value="3"] ~ .conditions.char::before {
+.theme:not([value="0"]) ~ .page .heading [name="attr_health"][value="3"] ~ .conditions.char::before {
 	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-1.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-2.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-blood-3.png");
 }
 
@@ -1899,29 +1966,7 @@ input[name="attr_sheet-type"][value="3"] ~ .page .heading .conditions.char {
 	display: inline-block;
 	width: inherit;
 	height: inherit;
-	z-index: 1;
-}
-.tabs label input:hover + span::after,
-.tabs label input:checked + span::after {
-	content: "";
-	position: absolute;
-	width: 30px;
-	height: 50px;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-clip.png");
-	background-repeat: no-repeat;
-	transition: top .25s, left .25s, opacity .125s, transform .25s;
-}
-.tabs label input:hover + span::after {
-	top: -20px;
-	left: -10px;
-	opacity: 0;
-	transform: rotate(45deg);
-}
-.tabs label input:checked + span::after {
-	top: -5px;
-	left: 0;
-	opacity: 1;
-	transform: rotate(0);
+	z-index: 3; /* WARNING : Pin fix */
 }
 .tabs label input + span + span {
 	display: inline-block;
@@ -1932,43 +1977,17 @@ input[name="attr_sheet-type"][value="3"] ~ .page .heading .conditions.char {
 	left: 20px;
 	z-index: 0;
 }
-.tabs label input + span + span::before,
-.tabs label input + span + span::after {
-	content: "";
-	position: absolute;
-	width: 20px;
-	height: 40px;
-	top: 0;
-	background-repeat: no-repeat;
+.tabs label input:checked + span {
+	background-color: #6666;
 }
-.tabs label input + span + span::before {
-	left: -20px;
+.tabs label input:focus + span {
+	background-color: #fd0;
 }
-.tabs label input + span + span::after {
-	right: -20px;
-}
-.tabs label input:checked + span + span {
-	text-shadow: 0 1px 0 #fff;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-center.png");
-	background-repeat: repeat-x;
-}
-.tabs label input:checked + span + span::before {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-left.png");
-}
-.tabs label input:checked + span + span::after {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-tape-right.png");
-}
-.tabs label input:hover + span + span,
-.tabs label input:hover + span + span::before,
-.tabs label input:hover + span + span::after {
-	background-color: #ffcc;
-}
-.tabs label input:focus + span + span,
-.tabs label input:focus + span + span::before,
-.tabs label input:focus + span + span::after {
-	background-color: #fff9;
+.tabs label input:hover + span {
+	background-color: #ffc;
 }
 
+/* Tabs Ordering */
 .body > div,
 .body > div h4.show-all,
 input[name="attr_show-all"][value="1"] ~ .tabs {
@@ -2015,7 +2034,7 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 }
 .page .main .investigator-history .autoexpand > span,
 .page .main .investigator-history .autoexpand > textarea {
-	min-height: 82px;
+	min-height: 62px;
 }
 
 /* ========================================================================== */
@@ -2024,6 +2043,7 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
+/* Skill Grid */
 .skills > .skill-grid {
 	display: grid;
 	position: relative;
@@ -2037,10 +2057,9 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	display: block;
 	width: 100%;
 	height: 10px;
-	top: -11px;
+	top: -10px;
 	left: 0;
-	border-top: 1px solid #4464;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
+	background-color: #fff;
 	z-index: 2;
 }
 .skills > input[name="attr_sk-avl"][value="1"] ~ .skill-grid {grid-template-rows: repeat(1, 1fr);}
@@ -2093,17 +2112,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 .skills > input[name="attr_sk-avl"][value="48"] ~ .skill-grid {grid-template-rows: repeat(48, 1fr);}
 .skills > input[name="attr_sk-avl"][value="49"] ~ .skill-grid {grid-template-rows: repeat(49, 1fr);}
 .skills > input[name="attr_sk-avl"][value="50"] ~ .skill-grid {grid-template-rows: repeat(50, 1fr);}
-.skills > div h4 {
-	height: 30px;
-	line-height: 16px;
-	margin: 0 8px;
-	color: #5549;
-	border-width: 0;
-	border-color: #554;
-	border-bottom-width: 4px;
-	background-color: transparent;
-	text-shadow: none;
-}
+
+/* Skill Insets */
 .skills > div .inset {
 	position: relative;
 	display: flex;
@@ -2125,6 +2135,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	display: inline-block;
 	position: absolute;
 }
+
+/* Skill Advancement Marks */
 .skills .inset > .adv + span {
 	width: 12px;
 	height: 12px;
@@ -2134,17 +2146,21 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	border: 1px solid #4446;
 	background-color: #fff;
 }
+.skills .inset > .adv:hover + span,
 .skills .inset > .adv:focus + span {
-	background-color: #fff9;
-	box-shadow: 0 0 2px 3px #b236;
+	box-shadow: 0 0 2px 3px #6666;
+}
+.skills .inset > .adv:focus + span {
+	background-color: #fd0;
 }
 .skills .inset > .adv:hover + span {
 	background-color: #ffc;
-	box-shadow: 0 0 2px 3px #b236;
 }
 .skills .inset > .adv:checked + span {
-	background-color: #b23;
+	background-color: #999;
 }
+
+/* Skill Availability Marks */
 .skills .inset > .avl + span {
 	width: 28px;
 	height: 28px;
@@ -2183,6 +2199,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 .skills .avl:not(:checked) ~ .occ + span {
 	opacity: .375;
 }
+
+/* Skill Occupation Marks */
 .skills .inset > input[type="checkbox"].occ,
 .skills .inset > input[type="checkbox"].occ + span {
 	position: absolute;
@@ -2203,7 +2221,7 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	font-size: 12px;
 	font-family: "Pictos";
 	text-align: center;
-	color: #6649;
+	color: #6669;
 	border-radius: 100%;
 	border: 1px solid #6646;
 	background-color: #fffc;
@@ -2229,6 +2247,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 .skills .language-own > input[type="checkbox"].occ + span {
 	right: 106px;
 }
+
+/* Skill Ratios */
 .skills .inset > .ratio,
 .skills .inset > .ratio .number {
 	width: 20px;
@@ -2238,10 +2258,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	line-height: 14px;
 	font-size: 8px;
 }
-.main .skills .inset button[type="roll"] {
-	width: calc(100% - 28px);
-	left: 28px;
-}
+
+/* Skill Inputs */
 .main .skills .inset > strong,
 .main .skills .inset > .text,
 .main .skills .inset > .number,
@@ -2317,9 +2335,22 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	color: #fff;
 	background-color: #554;
 }
+
+/* Skill Roll Buttons */
+.main .skills .inset button[type="roll"] {
+	width: calc(100% - 28px);
+	left: 28px;
+}
+.main .skills .credit-rating button[type="roll"],
+.main .skills .cthulhu-mythos button[type="roll"] {
+	width: 100%;
+	left: 0;
+}
+
+/* Skill Pictos */
 .main .skills .picto::before {
 	font-family: "Pictos";
-	color: #663;
+	color: #666;
 }
 .main .skills .picto.base::before {
 	content: "B";
@@ -2355,23 +2386,33 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	right: 56px;
 	font-size: 12px;
 	text-align: center;
-	z-index: -1;
+	z-index: 1;
 }
+
+/* Skill Head */
+.skill-head {
+	background-repeat: no-repeat;
+	background-position: left 0, right 0;
+}
+
+/* Skill Action Buttons */
 .main .skills button[type="action"] {
 	font-size: 12px;
 	font-weight: bold;
 	border: 1px solid #4446;
-	background-color: #eda6;
+	background-color: #fff;
 }
 .main .skills button[type="action"]:hover {
-	background-color: #fd0;
+	background-color: #ffc;
 }
 .main .skills button[type="action"]:focus {
-	background-color: #fff9;
+	background-color: #fd0;
 }
 .main .skills button[type="action"]:active {
 	background-color: #f90;
 }
+
+/* Skill Count */
 .main .skills .skill-count button,
 .main .skills .skill-occupation button {
 	height: 24px;
@@ -2383,11 +2424,6 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	margin: 0 6px;
 	font-size: 14px;
 	font-family: "Special Elite", serif;
-}
-.skill-head {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-typewriter-right.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-typewriter-left.png");
-	background-repeat: no-repeat;
-	background-position: left 0, right 0;
 }
 .skill-count {
 	margin: 12px 0;
@@ -2407,7 +2443,7 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	min-width: 28px;
 	padding: 0 4px;
 	text-align: center;
-	background-color: #6633;
+	background-color: #6663;
 }
 .skill-count > label.check {
 	width: auto;
@@ -2450,15 +2486,15 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 }
 .skill-count > label.check input:checked + span {
 	color: #fff;
-	background-color: #b23;
+	background-color: #666;
 }
 .skill-count > label.check input:focus + span {
 	color: #333;
-	background-color: #fff9;
+	background-color: #fd0;
 }
 .skill-count > label.check input:hover + span {
 	color: #333;
-	background-color: #ffcc;
+	background-color: #ffc;
 }
 .main .skills .skill-count button {
 	margin-left: 6px;
@@ -2473,15 +2509,17 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	margin-right: 4px;
 	font-weight: normal;
 }
+
+/* Skill Points */
 .skill-points {
 	display: flex;
 	width: 55%;
 	margin: 0 auto;
 	padding: 10px 0;
 	padding-right: 20px;
-	border: 1px solid #6643;
+	border: 1px solid #6663;
 	border-radius: 4px;
-	background: #6853;
+	background: #6663;
 	justify-content: center;
 }
 .skill-points div + div {
@@ -2496,7 +2534,7 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 }
 .skills .skill-points select {
 	text-align: center;
-	background-color: #6643;
+	background-color: #6663;
 }
 .skills .skill-points select.char {
 	width: 40px;
@@ -2527,19 +2565,21 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 }
 .skill-points span.num {
 	min-width: 32px;
-	background-color: #6643;
+	background-color: #6663;
 }
 .skill-points span.lft {
 	cursor: help;
 	font-weight: bold;
-	border: 1px solid #6646;
+	border: 1px solid #6666;
 	background-color: #fff6;
 }
 .skill-points input[type="hidden"][value^="-"] + span {
 	color: #b23;
 	font-weight: bold;
-	background-color: #ffe6;
+	background-color: #fe09;
 }
+
+/* Skill Occupation Text */
 .skill-occupation {
 	position: relative;
 	width: 66.66666666666667%;
@@ -2548,11 +2588,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 }
 .page .skill-occupation .autoexpand {
 	border: 4px solid #4443;
-	outline: 1px solid #5546;
+	outline: 1px solid #5556;
 	outline-offset: -4px;
-}
-.page .skill-occupation .autoexpand > textarea {
-	background-color: #cb96;
 }
 .skill-occupation > button {
 	position: absolute;
@@ -2560,6 +2597,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	right: -64px;
 	top: 24px;
 }
+
+/* Skill Controlers */
 .main .skills .skill-ctrl {
 	margin-top: 4px;
 	text-align: center;
@@ -2599,6 +2638,8 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 .main .skills .skill-ctrl button + button {
 	border-left: 0;
 }
+
+/* Skill Legend */
 .main .skills .skill-legend {
 	text-align: center;
 }
@@ -2673,9 +2714,9 @@ input[name="attr_char-activity"][value="military"] ~ .body .profile .personal-da
 	margin-top: 10px;
 }
 .weapons .reprow {
-	grid-template-columns: 3fr 100px 100px 1fr repeat(4, 34px);
+	grid-template-columns: 3fr 34px 100px 100px 1fr repeat(4, 34px);
 }
-.weapons .reprow.head label:nth-of-type(5) {
+.weapons .reprow.head label:nth-of-type(6) {
 	grid-column: auto/span 2;
 }
 .weapons .reprow.line .edit-holder {
@@ -2716,6 +2757,10 @@ input[type="hidden"][name="attr_db"][value="0"] + .checkbox + .checkbox {
 }
 input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 	grid-column: auto;
+}
+.weapons .text.big {
+	font-size: 14px;
+	font-weight: bold;
 }
 
 /* ========================================================================== */
@@ -2802,18 +2847,12 @@ input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 	line-height: 40px;
 }
 .money > .inset {
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-dollar.png");
 	background-position: -15px -20px;
 	background-repeat: no-repeat;
 }
 .page .main .money > div > input,
 .page .main .money > div > span {
 	height: 40px;
-}
-.page .main .money > div > .text,
-.page .main .money > div > input[type="text"] {
-	font-size: 12px;
-	text-align: center;
 }
 .page .main .money > div > .number,
 .page .main .money > div > input[type="number"] {
@@ -2869,7 +2908,6 @@ input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 	width: 100%;
 	min-height: 100px;
 	padding: 0 20%;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-weird-tales-september.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-weird-tales-december.png");
 	background-repeat: no-repeat;
 	background-position: left center, right center;
 }
@@ -2915,7 +2953,6 @@ input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 .note-block {
 	width: 100%;
 	padding: 0 15%;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-papers-left.png"), url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-papers-right.png");
 	background-repeat: repeat-y;
 	background-position: top left, top right;
 }
@@ -2943,474 +2980,31 @@ input[type="hidden"][name="attr_db"][value="1"] + .checkbox {
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
-/* # Edit Inputs */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-/* Edit Buttons */
-.page .main .edit-button,
-.page .main .hidden-button {
-	display: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-}
-.page .main .edit-button + strong,
-.page .main .edit-button + .edit-field + span {
-	pointer-events: none;
-	position: relative;
-	z-index: 5;
-}
-.page .main .edit-button:hover + strong,
-.page .main .edit-button:hover + .edit-field + span,
-.page .main .edit-button:focus + strong,
-.page .main .edit-button:focus + .edit-field + span {
-	color: #fff;
-}
-
-/* Edit Fields */
-.page .main select.edit-field,
-.page .main input[type="text"].edit-field,
-.page .main input[type="number"].edit-field {
-	background-color: #6633;
-}
-.page .main .edit-field + span {
-	display: none;
-}
-
-/* Edit False */
-.page .main select.edit-false,
-.page .main input[type="text"].edit-false,
-.page .main input[type="number"].edit-false {
-	border: 2px solid #4446;
-	background-color: #fff3;
-}
-.page .main input[type="text"].edit-false {
-	border: 2px solid #9236;
-}
-
-/* Edit Holder */
-.page .main .edit-holder {
-	position: relative;
-	display: inline-block;
-	vertical-align: top;
-	z-index: 6;
-}
-.page .main .edit-holder:before,
-.page .main .edit-holder:after {
-	content: "";
-	position: absolute;
-	display: inline-block;
-	width: 6px;
-	height: 100%;
-	top: 0;
-}
-.page .main .edit-holder:before {
-	left: -6px;
-}
-.page .main .edit-holder:after {
-	right: -6px;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Edit Mode */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-input[name="attr_edit-mode"][value="0"] ~ .body div .repcontrol {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ .body > .notes > .note-block .repcontrol {
-	display: block;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .edit-button {
-	display: inline-block;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .edit-field {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .edit-field + span {
-	display: inline-block;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .fieldbox .edit-field + span,
-input[name="attr_edit-mode"][value="0"] ~ div .reprow .edit-field + span {
-	display: flex;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .checkbox.checkmark:not(.no-txt) input[type="checkbox"] {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .autoexpand:not(.edit-true) textarea {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ div .autoexpand:not(.edit-true) span {
-	display: block;
-	max-height: none;
-	visibility: visible;
-	text-align: justify;
-}
-input[name="attr_edit-mode"][value="1"] ~ div .inset {
-	border-style: dashed;
-	background-color: #cb96;
-}
-input[name="attr_edit-mode"][value="1"] ~ div .inset.border,
-input[name="attr_edit-mode"][value="1"] ~ div .inset.border.gray {
-	border-left-color: #4449;
-	background-image: unset;
-}
-input[name="attr_edit-mode"][value="1"] ~ div .money > .inset {
-	background-image: unset;
-}
-input[name="attr_edit-mode"][value="1"] ~ .body .skills .inset > .adv,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills .inset > .adv + span {
-	display: none;
-}
-input[name="attr_edit-mode"][value="1"] ~ .body .skills .inset > .avl,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills .inset > .avl + span {
-	display: inline-block;
-}
-input[name="attr_edit-mode"][value="1"] ~ .body .skills > input[name="attr_sk-avl"] ~ .skill-grid {
-	grid-template-rows: repeat(48, 1fr);
-}
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .skill-head,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .skill-ctrl,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills .skill-legend {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .inset > .edit-text {
-	display: none;
-}
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .edit-field.min + span,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .edit-field.max + span {
-	display: none;
-}
-input[name="attr_edit-mode"][value="1"] ~ .body .weapons .reprow {
-	grid-template-columns: 3fr 100px 62px 34px 1fr repeat(4, 34px);
-}
-input[name="attr_edit-mode"][value="1"] ~ .body .weapons .reprow.head label:nth-child(3) {
-	grid-column: auto/span 2;
-}
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-accounting-avl"][value="0"] ~ div .accounting,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-aeronautical-systems-avl"][value="0"] ~ div .aeronautical-systems,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-animal-handling-avl"][value="0"] ~ div .animal-handling,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-anthropology-avl"][value="0"] ~ div .anthropology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-appraise-avl"][value="0"] ~ div .appraise,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-archaeology-avl"][value="0"] ~ div .archaeology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-avl"][value="0"] ~ div .artcraft,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-acting-avl"][value="0"] ~ div .artcraft-acting,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-fine-art-avl"][value="0"] ~ div .artcraft-fine-art,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-forgery-avl"][value="0"] ~ div .artcraft-forgery,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-photography-avl"][value="0"] ~ div .artcraft-photography,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-custom1-avl"][value="0"] ~ div .artcraft-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artcraft-custom2-avl"][value="0"] ~ div .artcraft-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-artillery-avl"][value="0"] ~ div .artillery,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-charm-avl"][value="0"] ~ div .charm,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-clairvoyance-avl"][value="0"] ~ div .clairvoyance,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-climb-avl"][value="0"] ~ div .climb,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-combat-engineer-avl"][value="0"] ~ div .combat-engineer,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-command-avl"][value="0"] ~ div .command,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-comptography-avl"][value="0"] ~ div .comptography,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-credit-rating-avl"][value="0"] ~ div .credit-rating,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-cthulhu-mythos-avl"][value="0"] ~ div .cthulhu-mythos,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-damage-control-avl"][value="0"] ~ div .damage-control,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-demolitions-avl"][value="0"] ~ div .demolitions,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-disguise-avl"][value="0"] ~ div .disguise,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-divination-avl"][value="0"] ~ div .divination,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-diving-avl"][value="0"] ~ div .diving,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-dodge-avl"][value="0"] ~ div .dodge,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-drive-auto-avl"][value="0"] ~ div .drive-auto,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-drive-tracked-avl"][value="0"] ~ div .drive-tracked,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-electrical-repair-avl"][value="0"] ~ div .electrical-repair,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-espionage-avl"][value="0"] ~ div .espionage,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fast-talk-avl"][value="0"] ~ div .fast-talk,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fieldcraft-avl"][value="0"] ~ div .fieldcraft,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-avl"][value="0"] ~ div .fighting,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-axe-avl"][value="0"] ~ div .fighting-axe,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-brawl-avl"][value="0"] ~ div .fighting-brawl,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-chainsaw-avl"][value="0"] ~ div .fighting-chainsaw,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-flail-avl"][value="0"] ~ div .fighting-flail,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-garrote-avl"][value="0"] ~ div .fighting-garrote,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-spear-avl"][value="0"] ~ div .fighting-spear,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-sword-avl"][value="0"] ~ div .fighting-sword,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-whip-avl"][value="0"] ~ div .fighting-whip,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-custom1-avl"][value="0"] ~ div .fighting-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-fighting-custom2-avl"][value="0"] ~ div .fighting-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-avl"][value="0"] ~ div .firearms,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-bow-avl"][value="0"] ~ div .firearms-bow,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-flamethrower-avl"][value="0"] ~ div .firearms-flamethrower,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-handgun-avl"][value="0"] ~ div .firearms-handgun,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-heavy-weapon-avl"][value="0"] ~ div .firearms-heavy-weapon,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-machine-gun-avl"][value="0"] ~ div .firearms-machine-gun,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-rifle-shotgun-avl"][value="0"] ~ div .firearms-rifle-shotgun,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-submachine-gun-avl"][value="0"] ~ div .firearms-submachine-gun,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-custom1-avl"][value="0"] ~ div .firearms-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-firearms-custom2-avl"][value="0"] ~ div .firearms-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-first-aid-avl"][value="0"] ~ div .first-aid,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-folklore-avl"][value="0"] ~ div .folklore,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-history-avl"][value="0"] ~ div .history,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-hypnosis-avl"][value="0"] ~ div .hypnosis,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-institutional-lore-avl"][value="0"] ~ div .institutional-lore,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-intimidate-avl"][value="0"] ~ div .intimidate,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-jump-avl"][value="0"] ~ div .jump,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-jury-rig-avl"][value="0"] ~ div .jury-rig,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-avl"][value="0"] ~ div .language,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-own-avl"][value="0"] ~ div .language-own,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other1-avl"][value="0"] ~ div .language-other1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other2-avl"][value="0"] ~ div .language-other2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other3-avl"][value="0"] ~ div .language-other3,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other4-avl"][value="0"] ~ div .language-other4,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other5-avl"][value="0"] ~ div .language-other5,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-language-other6-avl"][value="0"] ~ div .language-other6,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-law-avl"][value="0"] ~ div .law,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-library-use-avl"][value="0"] ~ div .library-use,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-listen-avl"][value="0"] ~ div .listen,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-locksmith-avl"][value="0"] ~ div .locksmith,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-lore-avl"][value="0"] ~ div .lore,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-lore-1-avl"][value="0"] ~ div .lore-1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-lore-2-avl"][value="0"] ~ div .lore-2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-lore-3-avl"][value="0"] ~ div .lore-3,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-lore-4-avl"][value="0"] ~ div .lore-4,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-mechanical-repair-avl"][value="0"] ~ div .mechanical-repair,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-medicine-avl"][value="0"] ~ div .medicine,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-medium-avl"][value="0"] ~ div .medium,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-military-doctrine-avl"][value="0"] ~ div .military-doctrine,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-natural-world-avl"][value="0"] ~ div .natural-world,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-navigate-avl"][value="0"] ~ div .navigate,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-occult-avl"][value="0"] ~ div .occult,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-operate-heavy-machinery-avl"][value="0"] ~ div .operate-heavy-machinery,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-parachute-avl"][value="0"] ~ div .parachute,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-perform-avl"][value="0"] ~ div .perform,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-persuade-avl"][value="0"] ~ div .persuade,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-photo-interpretation-avl"][value="0"] ~ div .photo-interpretation,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-pilot-avl"][value="0"] ~ div .pilot,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-pilot-aircraft-avl"][value="0"] ~ div .pilot-aircraft,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-pilot-boat-avl"][value="0"] ~ div .pilot-boat,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-pilot-custom1-avl"][value="0"] ~ div .pilot-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-pilot-custom2-avl"][value="0"] ~ div .pilot-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-psychoanalysis-avl"][value="0"] ~ div .psychoanalysis,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-psychology-avl"][value="0"] ~ div .psychology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-psychometry-avl"][value="0"] ~ div .psychometry,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-radio-operator-avl"][value="0"] ~ div .radio-operator,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-read-lips-avl"][value="0"] ~ div .read-lips,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-ride-avl"][value="0"] ~ div .ride,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-ride-motorcycle-avl"][value="0"] ~ div .ride-motorcycle,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-rifle-grenade-avl"][value="0"] ~ div .rifle-grenade,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-rope-use-avl"][value="0"] ~ div .rope-use,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-sabotage-avl"][value="0"] ~ div .sabotage,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-avl"][value="0"] ~ div .science,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-astronomy-avl"][value="0"] ~ div .science-astronomy,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-biology-avl"][value="0"] ~ div .science-biology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-botany-avl"][value="0"] ~ div .science-botany,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-chemistry-avl"][value="0"] ~ div .science-chemistry,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-cryptography-avl"][value="0"] ~ div .science-cryptography,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-enginnering-avl"][value="0"] ~ div .science-enginnering,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-forensics-avl"][value="0"] ~ div .science-forensics,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-geology-avl"][value="0"] ~ div .science-geology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-mathematics-avl"][value="0"] ~ div .science-mathematics,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-meteorology-avl"][value="0"] ~ div .science-meteorology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-pharmacy-avl"][value="0"] ~ div .science-pharmacy,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-physics-avl"][value="0"] ~ div .science-physics,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-custom1-avl"][value="0"] ~ div .science-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-science-custom2-avl"][value="0"] ~ div .science-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-scrounge-avl"][value="0"] ~ div .scrounge,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-ski-avl"][value="0"] ~ div .ski,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-sleight-of-hand-avl"][value="0"] ~ div .sleight-of-hand,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-spot-hidden-avl"][value="0"] ~ div .spot-hidden,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-spotter-avl"][value="0"] ~ div .spotter,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-stealth-avl"][value="0"] ~ div .stealth,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-surgery-avl"][value="0"] ~ div .surgery,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-survival-avl"][value="0"] ~ div .survival,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-swim-avl"][value="0"] ~ div .swim,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-tactics-avl"][value="0"] ~ div .tactics,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-teach-avl"][value="0"] ~ div .teach,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-telekinesis-avl"][value="0"] ~ div .telekinesis,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-telephony-avl"][value="0"] ~ div .telephony,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-theology-avl"][value="0"] ~ div .theology,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-throw-avl"][value="0"] ~ div .throw,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-torpedo-avl"][value="0"] ~ div .torpedo,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-track-avl"][value="0"] ~ div .track,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-skill-custom1-avl"][value="0"] ~ div .skill-custom1,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-skill-custom2-avl"][value="0"] ~ div .skill-custom2,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-skill-custom3-avl"][value="0"] ~ div .skill-custom3,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-skill-custom4-avl"][value="0"] ~ div .skill-custom4,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills input[name="attr_sk-skill-custom5-avl"][value="0"] ~ div .skill-custom5 {
-	display: none;
-}
-
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-accounting-occ"][value="1"] ~ div .accounting,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-aeronautical-systems-occ"][value="1"] ~ div .aeronautical-systems,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-animal-handling-occ"][value="1"] ~ div .animal-handling,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-anthropology-occ"][value="1"] ~ div .anthropology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-appraise-occ"][value="1"] ~ div .appraise,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-archaeology-occ"][value="1"] ~ div .archaeology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-acting-occ"][value="1"] ~ div .artcraft-acting,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-fine-art-occ"][value="1"] ~ div .artcraft-fine-art,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-forgery-occ"][value="1"] ~ div .artcraft-forgery,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-photography-occ"][value="1"] ~ div .artcraft-photography,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom1-occ"][value="1"] ~ div .artcraft-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom2-occ"][value="1"] ~ div .artcraft-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-artillery-occ"][value="1"] ~ div .artillery,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-charm-occ"][value="1"] ~ div .charm,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-clairvoyance-occ"][value="1"] ~ div .clairvoyance,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-climb-occ"][value="1"] ~ div .climb,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-combat-engineer-occ"][value="1"] ~ div .combat-engineer,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-command-occ"][value="1"] ~ div .command,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-comptography-occ"][value="1"] ~ div .comptography,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-cthulhu-mythos-occ"][value="1"] ~ div .cthulhu-mythos,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-damage-control-occ"][value="1"] ~ div .damage-control,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-demolitions-occ"][value="1"] ~ div .demolitions,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-disguise-occ"][value="1"] ~ div .disguise,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-divination-occ"][value="1"] ~ div .divination,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-diving-occ"][value="1"] ~ div .diving,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-dodge-occ"][value="1"] ~ div .dodge,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-drive-auto-occ"][value="1"] ~ div .drive-auto,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-drive-tracked-occ"][value="1"] ~ div .drive-tracked,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-electrical-repair-occ"][value="1"] ~ div .electrical-repair,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-espionage-occ"][value="1"] ~ div .espionage,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fast-talk-occ"][value="1"] ~ div .fast-talk,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fieldcraft-occ"][value="1"] ~ div .fieldcraft,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-axe-occ"][value="1"] ~ div .fighting-axe,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-brawl-occ"][value="1"] ~ div .fighting-brawl,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-chainsaw-occ"][value="1"] ~ div .fighting-chainsaw,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-flail-occ"][value="1"] ~ div .fighting-flail,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-garrote-occ"][value="1"] ~ div .fighting-garrote,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-spear-occ"][value="1"] ~ div .fighting-spear,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-sword-occ"][value="1"] ~ div .fighting-sword,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-whip-occ"][value="1"] ~ div .fighting-whip,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-custom1-occ"][value="1"] ~ div .fighting-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-fighting-custom2-occ"][value="1"] ~ div .fighting-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-bow-occ"][value="1"] ~ div .firearms-bow,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-flamethrower-occ"][value="1"] ~ div .firearms-flamethrower,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-handgun-occ"][value="1"] ~ div .firearms-handgun,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-heavy-weapon-occ"][value="1"] ~ div .firearms-heavy-weapon,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-machine-gun-occ"][value="1"] ~ div .firearms-machine-gun,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-rifle-shotgun-occ"][value="1"] ~ div .firearms-rifle-shotgun,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-submachine-gun-occ"][value="1"] ~ div .firearms-submachine-gun,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-custom1-occ"][value="1"] ~ div .firearms-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-firearms-custom2-occ"][value="1"] ~ div .firearms-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-first-aid-occ"][value="1"] ~ div .first-aid,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-folklore-occ"][value="1"] ~ div .folklore,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-history-occ"][value="1"] ~ div .history,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-hypnosis-occ"][value="1"] ~ div .hypnosis,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-institutional-lore-occ"][value="1"] ~ div .institutional-lore,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-intimidate-occ"][value="1"] ~ div .intimidate,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-jump-occ"][value="1"] ~ div .jump,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-jury-rig-occ"][value="1"] ~ div .jury-rig,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-own-occ"][value="1"] ~ div .language-own,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other1-occ"][value="1"] ~ div .language-other1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other2-occ"][value="1"] ~ div .language-other2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other3-occ"][value="1"] ~ div .language-other3,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other4-occ"][value="1"] ~ div .language-other4,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other5-occ"][value="1"] ~ div .language-other5,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-language-other6-occ"][value="1"] ~ div .language-other6,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-law-occ"][value="1"] ~ div .law,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-library-use-occ"][value="1"] ~ div .library-use,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-listen-occ"][value="1"] ~ div .listen,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-locksmith-occ"][value="1"] ~ div .locksmith,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-lore-1-occ"][value="1"] ~ div .lore-1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-lore-2-occ"][value="1"] ~ div .lore-2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-lore-3-occ"][value="1"] ~ div .lore-3,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-lore-4-occ"][value="1"] ~ div .lore-4,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-mechanical-repair-occ"][value="1"] ~ div .mechanical-repair,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-medicine-occ"][value="1"] ~ div .medicine,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-medium-occ"][value="1"] ~ div .medium,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-military-doctrine-occ"][value="1"] ~ div .military-doctrine,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-natural-world-occ"][value="1"] ~ div .natural-world,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-navigate-occ"][value="1"] ~ div .navigate,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-occult-occ"][value="1"] ~ div .occult,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-operate-heavy-machinery-occ"][value="1"] ~ div .operate-heavy-machinery,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-parachute-occ"][value="1"] ~ div .parachute,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-perform-occ"][value="1"] ~ div .perform,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-persuade-occ"][value="1"] ~ div .persuade,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-photo-interpretation-occ"][value="1"] ~ div .photo-interpretation,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-pilot-aircraft-occ"][value="1"] ~ div .pilot-aircraft,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-pilot-boat-occ"][value="1"] ~ div .pilot-boat,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-pilot-custom1-occ"][value="1"] ~ div .pilot-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-pilot-custom2-occ"][value="1"] ~ div .pilot-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-psychoanalysis-occ"][value="1"] ~ div .psychoanalysis,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-psychology-occ"][value="1"] ~ div .psychology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-psychometry-occ"][value="1"] ~ div .psychometry,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-radio-operator-occ"][value="1"] ~ div .radio-operator,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-read-lips-occ"][value="1"] ~ div .read-lips,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-ride-occ"][value="1"] ~ div .ride,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-ride-motorcycle-occ"][value="1"] ~ div .ride-motorcycle,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-rifle-grenade-occ"][value="1"] ~ div .rifle-grenade,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-rope-use-occ"][value="1"] ~ div .rope-use,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-sabotage-occ"][value="1"] ~ div .sabotage,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-astronomy-occ"][value="1"] ~ div .science-astronomy,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-biology-occ"][value="1"] ~ div .science-biology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-botany-occ"][value="1"] ~ div .science-botany,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-chemistry-occ"][value="1"] ~ div .science-chemistry,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-cryptography-occ"][value="1"] ~ div .science-cryptography,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-enginnering-occ"][value="1"] ~ div .science-enginnering,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-forensics-occ"][value="1"] ~ div .science-forensics,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-geology-occ"][value="1"] ~ div .science-geology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-mathematics-occ"][value="1"] ~ div .science-mathematics,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-meteorology-occ"][value="1"] ~ div .science-meteorology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-pharmacy-occ"][value="1"] ~ div .science-pharmacy,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-physics-occ"][value="1"] ~ div .science-physics,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-custom1-occ"][value="1"] ~ div .science-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-science-custom2-occ"][value="1"] ~ div .science-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-scrounge-occ"][value="1"] ~ div .scrounge,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-ski-occ"][value="1"] ~ div .ski,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-sleight-of-hand-occ"][value="1"] ~ div .sleight-of-hand,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-spot-hidden-occ"][value="1"] ~ div .spot-hidden,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-spotter-occ"][value="1"] ~ div .spotter,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-stealth-occ"][value="1"] ~ div .stealth,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-surgery-occ"][value="1"] ~ div .surgery,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-survival-occ"][value="1"] ~ div .survival,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-swim-occ"][value="1"] ~ div .swim,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-tactics-occ"][value="1"] ~ div .tactics,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-teach-occ"][value="1"] ~ div .teach,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-telekinesis-occ"][value="1"] ~ div .telekinesis,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-telephony-occ"][value="1"] ~ div .telephony,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-theology-occ"][value="1"] ~ div .theology,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-throw-occ"][value="1"] ~ div .throw,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-torpedo-occ"][value="1"] ~ div .torpedo,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-track-occ"][value="1"] ~ div .track,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-skill-custom1-occ"][value="1"] ~ div .skill-custom1,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-skill-custom2-occ"][value="1"] ~ div .skill-custom2,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-skill-custom3-occ"][value="1"] ~ div .skill-custom3,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-skill-custom4-occ"][value="1"] ~ div .skill-custom4,
-input[name="attr_edit-mode"][value="1"] ~ .body .skills input[name="attr_sk-skill-custom5-occ"][value="1"] ~ div .skill-custom5 {
-	border-left-color: #685;
-	background-color: #6853;
-}
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .inset > input[type="checkbox"].occ,
-input[name="attr_edit-mode"][value="0"] ~ .body .skills .inset > input[type="checkbox"].occ + span {
-	display: none;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
 /* # Monster */
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
-input[name="attr_sheet-type"] ~ .page .mons,
-input[name="attr_sheet-type"][value="4"] ~ .page .char,
-input[name="attr_sheet-type"][value="4"] ~ .page .skill-head {
+.type ~ .page .mons,
+.type[value="3"] ~ .page .char,
+.type[value="3"] ~ .page .skill-head {
 	display: none;
 }
-input[name="attr_sheet-type"][value="4"] ~ .page .mons {
+.type[value="3"] ~ .page .mons {
 	display: block;
 }
-input[name="attr_sheet-type"][value="4"] ~ .page .header .status.mons {
+.type[value="3"] ~ .page .headline .status.mons {
 	display: grid;
 	grid-template-columns: 60% 20% 20%;
 }
-.header .status.mons > div:nth-of-type(2) {
+.headline .status.mons > div:nth-of-type(2) {
 	grid-column: 2/4;
 }
-.header .status.mons > div:nth-of-type(3) {
+.headline .status.mons > div:nth-of-type(3) {
 	grid-column: 1/3;
 }
 .conditions.mons {
 	height: 90px;
 	border-left: 0;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-monster.png");
 	background-repeat: no-repeat;
 	background-position-y: -5px;
 	background-position-x: center;
@@ -3468,308 +3062,444 @@ input[name="attr_sheet-type"][value="4"] ~ .page .header .status.mons {
 
 /* ========================================================================== */
 /* -------------------------------------------------------------------------- */
-/* # Rolltemplates */
+/* # Edit Inputs */
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
-.sheet-rolltemplate-dice .sheet-roll-result .inlinerollresult,
-.sheet-rolltemplate-check .sheet-roll-result .inlinerollresult,
-.sheet-rolltemplate-attack .sheet-roll-result .inlinerollresult,
-.sheet-rolltemplate-damage .sheet-roll-result .inlinerollresult,
-.sheet-rolltemplate-spell .sheet-roll-result .inlinerollresult,
-.sheet-rolltemplate-check .sheet-roll-dice .inlinerollresult,
-.sheet-rolltemplate-attack .sheet-roll-dice .inlinerollresult,
-.sheet-rolltemplate-damage .sheet-roll-dice .inlinerollresult,
-.sheet-rolltemplate-spell .sheet-roll-dice .inlinerollresult,
-.sheet-rolltemplate-damage .sheet-roll-row .inlinerollresult {
-	border: none;
-	background-color: transparent;
+/* Edit Buttons */
+.page .main .edit-button,
+.page .main .hidden-button {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
-.sheet-rolltemplate-check .sheet-roll-infos .inlinerollresult,
-.sheet-rolltemplate-attack .sheet-roll-infos .inlinerollresult,
-.sheet-rolltemplate-damage .sheet-roll-row .inlinerollresult {
-	padding: 0;
+.page .main .edit-button + strong,
+.page .main .edit-button + .edit-field + span {
+	pointer-events: none;
+	position: relative;
+	z-index: 5;
 }
-.sheet-rolltemplate-dice .sheet-roll-wrapper,
-.sheet-rolltemplate-check .sheet-roll-wrapper,
-.sheet-rolltemplate-attack .sheet-roll-wrapper,
-.sheet-rolltemplate-damage .sheet-roll-wrapper,
-.sheet-rolltemplate-spell .sheet-roll-wrapper {
-	font-size: 0;
-	text-align: center;
-	color: #111;
-	overflow: hidden;
-}
-.sheet-rolltemplate-dice .sheet-roll-outer,
-.sheet-rolltemplate-check .sheet-roll-outer,
-.sheet-rolltemplate-attack .sheet-roll-outer,
-.sheet-rolltemplate-damage .sheet-roll-outer,
-.sheet-rolltemplate-spell .sheet-roll-outer {
-	margin: 12px;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/back-paper.jpg");
-}
-.sheet-rolltemplate-dice .sheet-roll-inner,
-.sheet-rolltemplate-check .sheet-roll-inner,
-.sheet-rolltemplate-attack .sheet-roll-inner,
-.sheet-rolltemplate-damage .sheet-roll-inner,
-.sheet-rolltemplate-spell .sheet-roll-inner {
-	padding: 2px 4px 4px;
-	border-image-source: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-border-paper.png");
-	border-image-slice: 80;
-	border-image-width: 80px;
-	border-image-outset: 12px;
-	border-image-repeat: round;
-}
-.sheet-rolltemplate-dice .sheet-char,
-.sheet-rolltemplate-check .sheet-char,
-.sheet-rolltemplate-attack .sheet-char,
-.sheet-rolltemplate-damage .sheet-char,
-.sheet-rolltemplate-spell .sheet-char {
-	margin: 4px 0;
-	padding-top: 6px;
-	line-height: 1;
-	font-size: 20px;
-	font-family: "Special Elite", serif;
+.page .main .edit-button:hover + strong,
+.page .main .edit-button:hover + .edit-field + span,
+.page .main .edit-button:focus + strong,
+.page .main .edit-button:focus + .edit-field + span {
 	color: #fff;
-	border: 1px solid #4444;
-	background-color: #6669;
-	text-shadow: 0 0 3px #000;
 }
-.sheet-rolltemplate-dice .sheet-pc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-check .sheet-pc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-attack .sheet-pc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-damage .sheet-pc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-spell .sheet-pc ~ .sheet-roll-inner .sheet-char {
-	background-color: #7759;
+
+/* Edit Fields */
+.page .main select.edit-field,
+.page .main input[type="text"].edit-field,
+.page .main input[type="number"].edit-field {
+	background-color: #6663;
 }
-.sheet-rolltemplate-dice .sheet-npc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-check .sheet-npc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-attack .sheet-npc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-damage .sheet-npc ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-spell .sheet-npc ~ .sheet-roll-inner .sheet-char {
-	background-color: #6129;
-}
-.sheet-rolltemplate-dice .sheet-monster ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-check .sheet-monster ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-attack .sheet-monster ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-damage .sheet-monster ~ .sheet-roll-inner .sheet-char,
-.sheet-rolltemplate-spell .sheet-monster ~ .sheet-roll-inner .sheet-char {
-	background-color: #6459;
-}
-.sheet-rolltemplate-check .sheet-roll-dice,
-.sheet-rolltemplate-attack .sheet-roll-dice,
-.sheet-rolltemplate-spell .sheet-roll-dice {
-	font-weight: bold;
-}
-.sheet-rolltemplate-dice .sheet-roll-name,
-.sheet-rolltemplate-check .sheet-roll-name,
-.sheet-rolltemplate-attack .sheet-roll-name,
-.sheet-rolltemplate-damage .sheet-roll-name,
-.sheet-rolltemplate-spell .sheet-roll-name,
-.sheet-rolltemplate-init .sheet-roll-result,
-.sheet-rolltemplate-dice .sheet-roll-result,
-.sheet-rolltemplate-check .sheet-roll-result,
-.sheet-rolltemplate-attack .sheet-roll-result,
-.sheet-rolltemplate-damage .sheet-roll-result {
-	margin-top: 4px;
-	font-size: 16px;
-	line-height: 1;
-}
-.sheet-rolltemplate-init .sheet-roll-result,
-.sheet-rolltemplate-dice .sheet-roll-result,
-.sheet-rolltemplate-check .sheet-roll-result,
-.sheet-rolltemplate-attack .sheet-roll-result,
-.sheet-rolltemplate-damage .sheet-roll-result {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.sheet-rolltemplate-dice .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value {
-	font-size: 20px;
-	font-weight: bold;
-}
-.sheet-rolltemplate-check .sheet-roll-result::before,
-.sheet-rolltemplate-attack .sheet-roll-result::before {
-	content: "";
-	display: inline-block;
-	width: 24px;
-	height: 24px;
-	margin-left: -28px;
-	margin-right: 4px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/ui-d10.png");
-}
-.sheet-rolltemplate-dice .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value,
-.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value {
-	color: #664;
-}
-.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value .inlinerollresult.fullcrit {
-	color: #284;
-}
-.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-value .inlinerollresult.fullfail {
-	color: #c24;
-}
-.sheet-rolltemplate-damage .sheet-roll-result > .sheet-roll-value .inlinerollresult {
-	color: #c24;
-}
-.sheet-rolltemplate-check .sheet-roll-result > .sheet-roll-compare,
-.sheet-rolltemplate-attack .sheet-roll-result > .sheet-roll-compare {
-	display: inline-block;
-	margin: 0 4px;
-	font-size: 13px;
-	color: #111c;
-}
-.sheet-rolltemplate-check .sheet-roll-infos,
-.sheet-rolltemplate-attack .sheet-roll-infos {
-	line-height: 16px;
-}
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-hard,
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-extreme,
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-bonus,
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-penalty,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-hard,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-extreme,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-bonus,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-penalty {
-	display: inline-block;
-	margin: 0 4px;
-	padding: 0 4px;
-	color: #fff;
-	font-size: 12px;
-	font-family: sans-serif;
-	border: 1px solid #3333;
-}
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-bonus,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-bonus {
-	background-color: #685;
-}
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-hard,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-hard {
-	background-color: #d53;
-}
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-extreme,
-.sheet-rolltemplate-check .sheet-roll-infos .sheet-penalty,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-extreme,
-.sheet-rolltemplate-attack .sheet-roll-infos .sheet-penalty {
-	background-color: #b23;
-}
-.sheet-rolltemplate-check .sheet-success,
-.sheet-rolltemplate-check .sheet-failure,
-.sheet-rolltemplate-attack .sheet-success,
-.sheet-rolltemplate-attack .sheet-failure {
-	margin: 4px 0 2px;
-	font-size: 16px;
-	font-weight: bold;
-}
-.sheet-rolltemplate-check .sheet-success,
-.sheet-rolltemplate-attack .sheet-success {
-	color: #284;
-}
-.sheet-rolltemplate-check .sheet-failure,
-.sheet-rolltemplate-attack .sheet-failure {
-	color: #c24;
-}
-.sheet-rolltemplate-attack .sheet-weapon-malfunction {
-	width: 100px;
-	margin: 8px auto 4px;
-	padding-top: 6px;
-	line-height: 1;
-	font-size: 24px;
-	font-family: "Special Elite", serif;
-	color: #c23;
-	border: 2px dotted #c23;
-	background-color: #fd09;
-}
-.sheet-rolltemplate-attack .sheet-attack-opposed {
-	font-size: 14px;
-	margin: 6px 0 2px;
-	padding-top: 6px;
-	border-top: 1px solid #6646;
-}
-.sheet-rolltemplate-attack .sheet-attack-opposed strong[data-i18n-title] {
-	cursor: help;
-}
-.sheet-rolltemplate-attack .sheet-roll-wrapper a[href] {
-	margin: 6px;
-	padding: 8px 6px 4px;
-	line-height: 1;
-	color: #fff;
-	font-family: "Special Elite", serif;
-	font-size: 20px;
-	text-decoration: none;
-	border: 1px solid #3336;
-	border-radius: 6px;
-	background-color: #b23;
-	text-shadow: 0 -1px #333c;
-	box-shadow: 0 1px 3px #333c;
-}
-.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:focus,
-.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:hover {
-	background-color: #e72;
-}
-.sheet-rolltemplate-attack .sheet-roll-wrapper a[href]:active {
-	background-color: #c30;
-	box-shadow: 0 1px 3px #333c inset;
-}
-.sheet-rolltemplate-damage .sheet-roll-dice {
-	font-size: 12px;
-}
-.sheet-rolltemplate-damage .sheet-roll-radius {
+.page .main .edit-field + span {
 	display: none;
 }
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice,
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	max-width: 200px;
-	margin: auto;
+
+/* Edit False */
+.page .main select.edit-false,
+.page .main input[type="text"].edit-false,
+.page .main input[type="number"].edit-false {
+	border: 2px solid #4446;
+	background-color: #fff1;
 }
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice > span + span,
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result > span + span {
-	border-left: 1px solid #4446;
+
+/* Edit Holder */
+.page .main .edit-holder {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	z-index: 6;
 }
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-dice {
-	margin-top: 6px;
+.page .main .edit-holder:before,
+.page .main .edit-holder:after {
+	content: "";
+	position: absolute;
+	display: inline-block;
+	width: 6px;
+	height: 100%;
+	top: 0;
 }
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result {
-	margin-top: 0;
+.page .main .edit-holder:before {
+	left: -6px;
 }
-.sheet-rolltemplate-damage .sheet-roll-radius ~ .sheet-roll-result .sheet-roll-value {
-	padding-bottom: 4px;
+.page .main .edit-holder:after {
+	right: -6px;
 }
-.sheet-rolltemplate-damage .sheet-roll-row {
-	font-size: 12px;
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Edit Mode */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.edit[value="0"] ~ .body div .repcontrol {
+	display: none;
 }
-.sheet-rolltemplate-spell .sheet-roll-name {
-	margin-bottom: 4px;
+.edit[value="0"] ~ .body > .notes > .note-block .repcontrol {
+	display: block;
 }
-.sheet-rolltemplate-damage .sheet-roll-row,
-.sheet-rolltemplate-spell .sheet-roll-row,
-.sheet-rolltemplate-spell .sheet-roll-desc {
-	padding: 2px 0;
-	font-size: 12px;
-	line-height: 14px;
+.edit[value="0"] ~ div .edit-button {
+	display: inline-block;
 }
-.sheet-rolltemplate-damage .sheet-roll-row,
-.sheet-rolltemplate-spell .sheet-roll-row {
-	text-align: center;
+.edit[value="0"] ~ div .edit-field {
+	display: none;
 }
-.sheet-rolltemplate-damage .sheet-roll-row.sheet-dmg-alt {
-	margin-top: 6px;
-	padding-top: 6px;
-	border-top: 1px solid #4436;
+.edit[value="0"] ~ div .edit-field + span {
+	display: inline-block;
 }
-.sheet-rolltemplate-spell .sheet-roll-desc {
-	padding: 2px 4px;
+.edit[value="0"] ~ div .fieldbox .edit-field + span,
+.edit[value="0"] ~ div .reprow .edit-field + span {
+	display: flex;
+}
+.edit[value="0"] ~ div .checkbox.checkmark:not(.no-txt) input[type="checkbox"] {
+	display: none;
+}
+.edit[value="0"] ~ div .autoexpand:not(.edit-true) textarea {
+	display: none;
+}
+.edit[value="0"] ~ div .autoexpand:not(.edit-true) span {
+	display: block;
+	max-height: none;
+	visibility: visible;
 	text-align: justify;
 }
-.sheet-rolltemplate-spell .sheet-roll-cost + .sheet-roll-dice::before {
-	content: " ; ";
-	font-weight: normal;
+.edit[value="1"] ~ div .inset {
+	border-style: dashed;
+	background-color: #ccc6;
+}
+.theme ~ .page .edit[value="1"] ~ div .inset.border,
+.theme ~ .page .edit[value="1"] ~ div .inset.border.gray {
+	border-left-style: solid;
+	background-image: unset;
+}
+.edit[value="1"] ~ div .money > .inset {
+	background-image: unset;
+}
+.edit[value="1"] ~ .body .skills .inset > .adv,
+.edit[value="1"] ~ .body .skills .inset > .adv + span {
+	display: none;
+}
+.edit[value="1"] ~ .body .skills .inset > .avl,
+.edit[value="1"] ~ .body .skills .inset > .avl + span {
+	display: inline-block;
+}
+.edit[value="1"] ~ .body .skills > input[name="attr_sk-avl"] ~ .skill-grid {
+	grid-template-rows: repeat(48, 1fr);
+}
+.edit[value="0"] ~ .body .skills .skill-head,
+.edit[value="0"] ~ .body .skills .skill-ctrl,
+.edit[value="1"] ~ .body .skills .skill-legend {
+	display: none;
+}
+.edit[value="0"] ~ .body .skills .inset > .edit-text {
+	display: none;
+}
+.edit[value="0"] ~ .body .skills .edit-field.min + span,
+.edit[value="0"] ~ .body .skills .edit-field.max + span {
+	display: none;
+}
+.edit[value="1"] ~ .body .weapons .reprow {
+	grid-template-columns: 3fr 34px 100px 62px 34px 1fr repeat(4, 34px);
+}
+.edit[value="1"] ~ .body .weapons .reprow.head label:nth-child(4) {
+	grid-column: auto/span 2;
+}
+.edit[value="0"] ~ .body .skills input[name="attr_sk-accounting-avl"][value="0"] ~ div .accounting,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-aeronautical-systems-avl"][value="0"] ~ div .aeronautical-systems,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-animal-handling-avl"][value="0"] ~ div .animal-handling,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-anthropology-avl"][value="0"] ~ div .anthropology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-appraise-avl"][value="0"] ~ div .appraise,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-archaeology-avl"][value="0"] ~ div .archaeology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-avl"][value="0"] ~ div .artcraft,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-acting-avl"][value="0"] ~ div .artcraft-acting,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-fine-art-avl"][value="0"] ~ div .artcraft-fine-art,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-forgery-avl"][value="0"] ~ div .artcraft-forgery,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-photography-avl"][value="0"] ~ div .artcraft-photography,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-custom1-avl"][value="0"] ~ div .artcraft-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artcraft-custom2-avl"][value="0"] ~ div .artcraft-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-artillery-avl"][value="0"] ~ div .artillery,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-charm-avl"][value="0"] ~ div .charm,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-clairvoyance-avl"][value="0"] ~ div .clairvoyance,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-climb-avl"][value="0"] ~ div .climb,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-combat-engineer-avl"][value="0"] ~ div .combat-engineer,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-command-avl"][value="0"] ~ div .command,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-comptography-avl"][value="0"] ~ div .comptography,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-credit-rating-avl"][value="0"] ~ div .credit-rating,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-cthulhu-mythos-avl"][value="0"] ~ div .cthulhu-mythos,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-damage-control-avl"][value="0"] ~ div .damage-control,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-demolitions-avl"][value="0"] ~ div .demolitions,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-disguise-avl"][value="0"] ~ div .disguise,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-divination-avl"][value="0"] ~ div .divination,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-diving-avl"][value="0"] ~ div .diving,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-dodge-avl"][value="0"] ~ div .dodge,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-drive-auto-avl"][value="0"] ~ div .drive-auto,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-drive-tracked-avl"][value="0"] ~ div .drive-tracked,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-electrical-repair-avl"][value="0"] ~ div .electrical-repair,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-espionage-avl"][value="0"] ~ div .espionage,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fast-talk-avl"][value="0"] ~ div .fast-talk,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fieldcraft-avl"][value="0"] ~ div .fieldcraft,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-avl"][value="0"] ~ div .fighting,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-axe-avl"][value="0"] ~ div .fighting-axe,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-brawl-avl"][value="0"] ~ div .fighting-brawl,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-chainsaw-avl"][value="0"] ~ div .fighting-chainsaw,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-flail-avl"][value="0"] ~ div .fighting-flail,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-garrote-avl"][value="0"] ~ div .fighting-garrote,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-spear-avl"][value="0"] ~ div .fighting-spear,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-sword-avl"][value="0"] ~ div .fighting-sword,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-whip-avl"][value="0"] ~ div .fighting-whip,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-custom1-avl"][value="0"] ~ div .fighting-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-fighting-custom2-avl"][value="0"] ~ div .fighting-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-avl"][value="0"] ~ div .firearms,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-bow-avl"][value="0"] ~ div .firearms-bow,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-flamethrower-avl"][value="0"] ~ div .firearms-flamethrower,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-handgun-avl"][value="0"] ~ div .firearms-handgun,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-heavy-weapon-avl"][value="0"] ~ div .firearms-heavy-weapon,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-machine-gun-avl"][value="0"] ~ div .firearms-machine-gun,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-rifle-shotgun-avl"][value="0"] ~ div .firearms-rifle-shotgun,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-submachine-gun-avl"][value="0"] ~ div .firearms-submachine-gun,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-custom1-avl"][value="0"] ~ div .firearms-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-firearms-custom2-avl"][value="0"] ~ div .firearms-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-first-aid-avl"][value="0"] ~ div .first-aid,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-folklore-avl"][value="0"] ~ div .folklore,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-history-avl"][value="0"] ~ div .history,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-hypnosis-avl"][value="0"] ~ div .hypnosis,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-institutional-lore-avl"][value="0"] ~ div .institutional-lore,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-intimidate-avl"][value="0"] ~ div .intimidate,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-jump-avl"][value="0"] ~ div .jump,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-jury-rig-avl"][value="0"] ~ div .jury-rig,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-avl"][value="0"] ~ div .language,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-own-avl"][value="0"] ~ div .language-own,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other1-avl"][value="0"] ~ div .language-other1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other2-avl"][value="0"] ~ div .language-other2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other3-avl"][value="0"] ~ div .language-other3,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other4-avl"][value="0"] ~ div .language-other4,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other5-avl"][value="0"] ~ div .language-other5,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-language-other6-avl"][value="0"] ~ div .language-other6,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-law-avl"][value="0"] ~ div .law,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-library-use-avl"][value="0"] ~ div .library-use,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-listen-avl"][value="0"] ~ div .listen,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-locksmith-avl"][value="0"] ~ div .locksmith,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-lore-avl"][value="0"] ~ div .lore,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-lore-1-avl"][value="0"] ~ div .lore-1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-lore-2-avl"][value="0"] ~ div .lore-2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-lore-3-avl"][value="0"] ~ div .lore-3,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-lore-4-avl"][value="0"] ~ div .lore-4,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-mechanical-repair-avl"][value="0"] ~ div .mechanical-repair,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-medicine-avl"][value="0"] ~ div .medicine,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-medium-avl"][value="0"] ~ div .medium,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-military-doctrine-avl"][value="0"] ~ div .military-doctrine,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-natural-world-avl"][value="0"] ~ div .natural-world,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-navigate-avl"][value="0"] ~ div .navigate,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-occult-avl"][value="0"] ~ div .occult,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-operate-heavy-machinery-avl"][value="0"] ~ div .operate-heavy-machinery,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-parachute-avl"][value="0"] ~ div .parachute,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-perform-avl"][value="0"] ~ div .perform,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-persuade-avl"][value="0"] ~ div .persuade,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-photo-interpretation-avl"][value="0"] ~ div .photo-interpretation,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-pilot-avl"][value="0"] ~ div .pilot,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-pilot-aircraft-avl"][value="0"] ~ div .pilot-aircraft,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-pilot-boat-avl"][value="0"] ~ div .pilot-boat,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-pilot-custom1-avl"][value="0"] ~ div .pilot-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-pilot-custom2-avl"][value="0"] ~ div .pilot-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-psychoanalysis-avl"][value="0"] ~ div .psychoanalysis,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-psychology-avl"][value="0"] ~ div .psychology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-psychometry-avl"][value="0"] ~ div .psychometry,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-radio-operator-avl"][value="0"] ~ div .radio-operator,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-read-lips-avl"][value="0"] ~ div .read-lips,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-ride-avl"][value="0"] ~ div .ride,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-ride-motorcycle-avl"][value="0"] ~ div .ride-motorcycle,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-rifle-grenade-avl"][value="0"] ~ div .rifle-grenade,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-rope-use-avl"][value="0"] ~ div .rope-use,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-sabotage-avl"][value="0"] ~ div .sabotage,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-avl"][value="0"] ~ div .science,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-astronomy-avl"][value="0"] ~ div .science-astronomy,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-biology-avl"][value="0"] ~ div .science-biology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-botany-avl"][value="0"] ~ div .science-botany,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-chemistry-avl"][value="0"] ~ div .science-chemistry,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-cryptography-avl"][value="0"] ~ div .science-cryptography,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-enginnering-avl"][value="0"] ~ div .science-enginnering,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-forensics-avl"][value="0"] ~ div .science-forensics,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-geology-avl"][value="0"] ~ div .science-geology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-mathematics-avl"][value="0"] ~ div .science-mathematics,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-meteorology-avl"][value="0"] ~ div .science-meteorology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-pharmacy-avl"][value="0"] ~ div .science-pharmacy,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-physics-avl"][value="0"] ~ div .science-physics,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-custom1-avl"][value="0"] ~ div .science-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-science-custom2-avl"][value="0"] ~ div .science-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-scrounge-avl"][value="0"] ~ div .scrounge,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-ski-avl"][value="0"] ~ div .ski,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-sleight-of-hand-avl"][value="0"] ~ div .sleight-of-hand,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-spot-hidden-avl"][value="0"] ~ div .spot-hidden,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-spotter-avl"][value="0"] ~ div .spotter,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-stealth-avl"][value="0"] ~ div .stealth,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-surgery-avl"][value="0"] ~ div .surgery,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-survival-avl"][value="0"] ~ div .survival,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-swim-avl"][value="0"] ~ div .swim,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-tactics-avl"][value="0"] ~ div .tactics,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-teach-avl"][value="0"] ~ div .teach,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-telekinesis-avl"][value="0"] ~ div .telekinesis,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-telephony-avl"][value="0"] ~ div .telephony,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-theology-avl"][value="0"] ~ div .theology,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-throw-avl"][value="0"] ~ div .throw,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-torpedo-avl"][value="0"] ~ div .torpedo,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-track-avl"][value="0"] ~ div .track,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-skill-custom1-avl"][value="0"] ~ div .skill-custom1,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-skill-custom2-avl"][value="0"] ~ div .skill-custom2,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-skill-custom3-avl"][value="0"] ~ div .skill-custom3,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-skill-custom4-avl"][value="0"] ~ div .skill-custom4,
+.edit[value="0"] ~ .body .skills input[name="attr_sk-skill-custom5-avl"][value="0"] ~ div .skill-custom5 {
+	display: none;
+}
+
+.edit[value="1"] ~ .body .skills input[name="attr_sk-accounting-occ"][value="1"] ~ div .accounting,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-aeronautical-systems-occ"][value="1"] ~ div .aeronautical-systems,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-animal-handling-occ"][value="1"] ~ div .animal-handling,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-anthropology-occ"][value="1"] ~ div .anthropology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-appraise-occ"][value="1"] ~ div .appraise,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-archaeology-occ"][value="1"] ~ div .archaeology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-acting-occ"][value="1"] ~ div .artcraft-acting,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-fine-art-occ"][value="1"] ~ div .artcraft-fine-art,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-forgery-occ"][value="1"] ~ div .artcraft-forgery,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-photography-occ"][value="1"] ~ div .artcraft-photography,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom1-occ"][value="1"] ~ div .artcraft-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artcraft-custom2-occ"][value="1"] ~ div .artcraft-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-artillery-occ"][value="1"] ~ div .artillery,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-charm-occ"][value="1"] ~ div .charm,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-clairvoyance-occ"][value="1"] ~ div .clairvoyance,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-climb-occ"][value="1"] ~ div .climb,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-combat-engineer-occ"][value="1"] ~ div .combat-engineer,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-command-occ"][value="1"] ~ div .command,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-comptography-occ"][value="1"] ~ div .comptography,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-cthulhu-mythos-occ"][value="1"] ~ div .cthulhu-mythos,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-damage-control-occ"][value="1"] ~ div .damage-control,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-demolitions-occ"][value="1"] ~ div .demolitions,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-disguise-occ"][value="1"] ~ div .disguise,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-divination-occ"][value="1"] ~ div .divination,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-diving-occ"][value="1"] ~ div .diving,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-dodge-occ"][value="1"] ~ div .dodge,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-drive-auto-occ"][value="1"] ~ div .drive-auto,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-drive-tracked-occ"][value="1"] ~ div .drive-tracked,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-electrical-repair-occ"][value="1"] ~ div .electrical-repair,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-espionage-occ"][value="1"] ~ div .espionage,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fast-talk-occ"][value="1"] ~ div .fast-talk,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fieldcraft-occ"][value="1"] ~ div .fieldcraft,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-axe-occ"][value="1"] ~ div .fighting-axe,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-brawl-occ"][value="1"] ~ div .fighting-brawl,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-chainsaw-occ"][value="1"] ~ div .fighting-chainsaw,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-flail-occ"][value="1"] ~ div .fighting-flail,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-garrote-occ"][value="1"] ~ div .fighting-garrote,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-spear-occ"][value="1"] ~ div .fighting-spear,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-sword-occ"][value="1"] ~ div .fighting-sword,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-whip-occ"][value="1"] ~ div .fighting-whip,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-custom1-occ"][value="1"] ~ div .fighting-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-fighting-custom2-occ"][value="1"] ~ div .fighting-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-bow-occ"][value="1"] ~ div .firearms-bow,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-flamethrower-occ"][value="1"] ~ div .firearms-flamethrower,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-handgun-occ"][value="1"] ~ div .firearms-handgun,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-heavy-weapon-occ"][value="1"] ~ div .firearms-heavy-weapon,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-machine-gun-occ"][value="1"] ~ div .firearms-machine-gun,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-rifle-shotgun-occ"][value="1"] ~ div .firearms-rifle-shotgun,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-submachine-gun-occ"][value="1"] ~ div .firearms-submachine-gun,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-custom1-occ"][value="1"] ~ div .firearms-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-firearms-custom2-occ"][value="1"] ~ div .firearms-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-first-aid-occ"][value="1"] ~ div .first-aid,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-folklore-occ"][value="1"] ~ div .folklore,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-history-occ"][value="1"] ~ div .history,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-hypnosis-occ"][value="1"] ~ div .hypnosis,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-institutional-lore-occ"][value="1"] ~ div .institutional-lore,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-intimidate-occ"][value="1"] ~ div .intimidate,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-jump-occ"][value="1"] ~ div .jump,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-jury-rig-occ"][value="1"] ~ div .jury-rig,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-own-occ"][value="1"] ~ div .language-own,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other1-occ"][value="1"] ~ div .language-other1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other2-occ"][value="1"] ~ div .language-other2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other3-occ"][value="1"] ~ div .language-other3,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other4-occ"][value="1"] ~ div .language-other4,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other5-occ"][value="1"] ~ div .language-other5,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-language-other6-occ"][value="1"] ~ div .language-other6,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-law-occ"][value="1"] ~ div .law,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-library-use-occ"][value="1"] ~ div .library-use,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-listen-occ"][value="1"] ~ div .listen,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-locksmith-occ"][value="1"] ~ div .locksmith,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-1-occ"][value="1"] ~ div .lore-1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-2-occ"][value="1"] ~ div .lore-2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-3-occ"][value="1"] ~ div .lore-3,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-lore-4-occ"][value="1"] ~ div .lore-4,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-mechanical-repair-occ"][value="1"] ~ div .mechanical-repair,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-medicine-occ"][value="1"] ~ div .medicine,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-medium-occ"][value="1"] ~ div .medium,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-military-doctrine-occ"][value="1"] ~ div .military-doctrine,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-natural-world-occ"][value="1"] ~ div .natural-world,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-navigate-occ"][value="1"] ~ div .navigate,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-occult-occ"][value="1"] ~ div .occult,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-operate-heavy-machinery-occ"][value="1"] ~ div .operate-heavy-machinery,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-parachute-occ"][value="1"] ~ div .parachute,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-perform-occ"][value="1"] ~ div .perform,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-persuade-occ"][value="1"] ~ div .persuade,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-photo-interpretation-occ"][value="1"] ~ div .photo-interpretation,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-aircraft-occ"][value="1"] ~ div .pilot-aircraft,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-boat-occ"][value="1"] ~ div .pilot-boat,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-custom1-occ"][value="1"] ~ div .pilot-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-pilot-custom2-occ"][value="1"] ~ div .pilot-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-psychoanalysis-occ"][value="1"] ~ div .psychoanalysis,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-psychology-occ"][value="1"] ~ div .psychology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-psychometry-occ"][value="1"] ~ div .psychometry,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-radio-operator-occ"][value="1"] ~ div .radio-operator,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-read-lips-occ"][value="1"] ~ div .read-lips,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-ride-occ"][value="1"] ~ div .ride,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-ride-motorcycle-occ"][value="1"] ~ div .ride-motorcycle,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-rifle-grenade-occ"][value="1"] ~ div .rifle-grenade,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-rope-use-occ"][value="1"] ~ div .rope-use,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-sabotage-occ"][value="1"] ~ div .sabotage,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-astronomy-occ"][value="1"] ~ div .science-astronomy,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-biology-occ"][value="1"] ~ div .science-biology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-botany-occ"][value="1"] ~ div .science-botany,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-chemistry-occ"][value="1"] ~ div .science-chemistry,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-cryptography-occ"][value="1"] ~ div .science-cryptography,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-enginnering-occ"][value="1"] ~ div .science-enginnering,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-forensics-occ"][value="1"] ~ div .science-forensics,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-geology-occ"][value="1"] ~ div .science-geology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-mathematics-occ"][value="1"] ~ div .science-mathematics,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-meteorology-occ"][value="1"] ~ div .science-meteorology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-pharmacy-occ"][value="1"] ~ div .science-pharmacy,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-physics-occ"][value="1"] ~ div .science-physics,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-custom1-occ"][value="1"] ~ div .science-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-science-custom2-occ"][value="1"] ~ div .science-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-scrounge-occ"][value="1"] ~ div .scrounge,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-ski-occ"][value="1"] ~ div .ski,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-sleight-of-hand-occ"][value="1"] ~ div .sleight-of-hand,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-spot-hidden-occ"][value="1"] ~ div .spot-hidden,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-spotter-occ"][value="1"] ~ div .spotter,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-stealth-occ"][value="1"] ~ div .stealth,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-surgery-occ"][value="1"] ~ div .surgery,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-survival-occ"][value="1"] ~ div .survival,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-swim-occ"][value="1"] ~ div .swim,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-tactics-occ"][value="1"] ~ div .tactics,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-teach-occ"][value="1"] ~ div .teach,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-telekinesis-occ"][value="1"] ~ div .telekinesis,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-telephony-occ"][value="1"] ~ div .telephony,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-theology-occ"][value="1"] ~ div .theology,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-throw-occ"][value="1"] ~ div .throw,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-torpedo-occ"][value="1"] ~ div .torpedo,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-track-occ"][value="1"] ~ div .track,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom1-occ"][value="1"] ~ div .skill-custom1,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom2-occ"][value="1"] ~ div .skill-custom2,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom3-occ"][value="1"] ~ div .skill-custom3,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom4-occ"][value="1"] ~ div .skill-custom4,
+.edit[value="1"] ~ .body .skills input[name="attr_sk-skill-custom5-occ"][value="1"] ~ div .skill-custom5 {
+	border-left-color: #685;
+	background-color: #6853;
+}
+.edit[value="0"] ~ .body .skills .inset > input[type="checkbox"].occ,
+.edit[value="0"] ~ .body .skills .inset > input[type="checkbox"].occ + span {
+	display: none;
+}
+
+.edit[value="0"] ~ .body .skills .credit-rating,
+.edit[value="0"] ~ .body .skills .cthulhu-mythos {
+	padding-left: 28px;
 }

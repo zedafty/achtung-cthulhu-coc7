@@ -5,7 +5,7 @@
 // =============================================================================
 
 const Sheet = {
-	"version" : 1.02
+	"version" : 1.03
 };
 
 // =============================================================================
@@ -55,7 +55,7 @@ function getLang(s) { // s = string ; returns string
 
 const Formulas = {
 	"int" : /^([\+\-]?\d+)$/,
-	"pts" : /^(\d+|\d+\s*[\+\-]\s*\d+)$/,
+	"pts" : /^([\+\-]?\d+(\s*[\+\-]\s*\d+)?(\s*[\+\-]\s*\d+)?(\s*[\+\-]\s*\d+)?)$/,
 	"rng" : /^([\+\-]?\d+|[\+\-]?\d+\s*[\+\-\*\/]\s*\d+|str\s*[\+\-\*\/]\s*\d+)$/,
 	"dmg" : /^([\+\-]?\d+|[\+\-]?\d+d\d+|[\+\-]?\d+d\d+\s*[\+\-]\s*\d+|[\+\-]?\d+d\d+\s*[\+\-]\s*\d+d\d+|[\+\-]?\d+d\d+\s*[\+\-]\s*\d+d\d+\s*[\+\-]\s*\d+)$/,
 	"dmg-bon" : /^([\+\-]?\d+|[\+\-]?\d+d\d+)$/,
@@ -209,7 +209,7 @@ on("change:wgm-toggle", function(e) { // e = event
 const updateChatName = function() {
 	getAttrs(["sheet-type", "char-name", "mons-name", "mons-depiction", "show-depiction"], v => {
 		let u = {};
-		if (toInt(v["sheet-type"]) < 4) u["chat-name"] = v["char-name"];
+		if (toInt(v["sheet-type"]) < 3) u["chat-name"] = v["char-name"];
 		else u["chat-name"] = v["show-depiction"] == "1" ? v["mons-depiction"] : v["mons-name"];
 		setAttrs(u, {"silent" : true});
 	});
@@ -334,7 +334,7 @@ const resetSkillPoints = function(f) { // f = callback
 		if (WeaponSkills.includes(k)) c.push(updateWeaponSkill("sk-" + k));
 	}
 	u["sk-credit-min"] = 0;
-	u["sk-credit-max"] = 100;
+	u["sk-credit-max"] = 99;
 	u["sk-pts-pool"] = "occ";
 	u["sk-pts-base"] = n;
 	u["sk-pts-occ"] = 0;
@@ -343,6 +343,8 @@ const resetSkillPoints = function(f) { // f = callback
 	u["sk-pts-tot"] = n;
 	setAttrs(u, {"silent" : true}, function() {
 		for (o in c) c[o];
+		computeOccupationSkillPoints();
+		computeInterestsSkillPoints();
 		f();
 	});
 };
@@ -455,11 +457,13 @@ on("change:sk-fighting-custom1-name change:sk-fighting-custom2-name change:sk-fi
 
 const updateCreditRating = function() {
 	getAttrs(["sk-credit-rating", "sk-credit-min", "sk-credit-max"], v => {
-		let r = toInt(v["sk-credit-rating"]);
-		let n = toInt(v["sk-credit-min"]);
-		let m = toInt(v["sk-credit-max"]);
-		if (r < n) setAttrs({"sk-credit-rating" : n});
-		else if (r > m) setAttrs({"sk-credit-rating" : m});
+		let u = {};
+		let n = clamp(toInt(v["sk-credit-min"]), 0, 98);
+		let m = clamp(toInt(v["sk-credit-max"]), n + 1, 99);
+		u["sk-credit-min"] = n;
+		u["sk-credit-max"] = m;
+		u["sk-credit-rating"] = clamp(toInt(v["sk-credit-rating"]), n, m);
+		setAttrs(u, {"silent" : true});
 	});
 };
 
@@ -481,27 +485,28 @@ const Characteristics = ["str", "con", "siz", "dex", "app", "edu", "int", "pow",
 
 const updateHitPointsMax = function() {
 	getAttrs(["con", "siz"], v => {
-		setAttrs({"hp_max" : Math.floor((toInt(v["con"]) + toInt(v["siz"])) / 10)});
+		let u = {};
+		u["hp_max"] = Math.floor((toInt(v["con"]) + toInt(v["siz"])) / 10);
+		setAttrs(u);
 	});
 };
 
-const updatePoints = function(k) { // k = hp, mp or san
-	getAttrs([k, k + "_max"], v => {
-		let n;
-		let s = v[k];
+const updatePoints = function(k) { // p = hp, mp or san
+	getAttrs([k, k + "_max", "san-base"], v => {
 		let r = Formulas["pts"];
+		let s = v[k];
+		let n;
+		let m = toInt(v[k + "_max"]);
 		let b = false;
 		let u = {};
 		if (r.test(s)) {
 			n = eval(s);
-			u[k] = n;
 			b = true;
 		} else {
-			n = toInt(v[k]);
+			n = toInt(s);
 		}
-		let m = toInt(v[k + "_max"]);
 		if (n < 0 || n > m) {
-			u[k] = n > m ? m : 0;
+			n = n > m ? m : 0;
 			b = true;
 		}
 		if (k == "hp") {
@@ -509,8 +514,17 @@ const updatePoints = function(k) { // k = hp, mp or san
 			else if (n > m * 0.5) u["health"] = "1";
 			else if (n > m * 0.25) u["health"] = "2";
 			else u["health"] = "3";
+			u["state-major-wound-cap"] = Math.floor(m / 2);
 		}
-		if (b) setAttrs(u, {"silent" : true});
+		if (k == "san" && n != toInt(v["san-base"])) {
+			u["insanity-indefinite-chk"] = 1;
+			u["san-base"] = n;
+			b = true;
+		}
+		if (b) {
+			u[k] = n;
+			setAttrs(u, {"silent" : true});
+		}
 	});
 };
 
@@ -528,7 +542,7 @@ const updateDamageBonusAndBuild = function(f) {
 	});
 };
 
-const updateMovementRate = function(f) {
+const updateMovementRate = function(f) { // f = callback
 	if (f == null) f = function(){};
 	getAttrs(["str", "siz", "dex", "age"], v => {
 		let str = toInt(v["str"]);
@@ -555,6 +569,20 @@ on("change:age", function() {
 
 on("change:hp_max change:mp_max change:san_max", function(e) { // e = event
 	updatePoints(e.sourceAttribute.replace("_max", ""));
+});
+
+const recalcInsanityIndefiniteCap = function() {
+	getAttrs(["san"], v => {
+		let u = {};
+		let n = toInt(v["san"]);
+		u["insanity-indefinite-chk"] = 0;
+		u["insanity-indefinite-cap"] = n - Math.floor(n / 5);
+		setAttrs(u, {"silent" : true});
+	});
+};
+
+on("clicked:recalc-insanity-indefinite-cap", function() {
+	recalcInsanityIndefiniteCap();
 });
 
 // =============================================================================
@@ -614,45 +642,111 @@ const updateWeaponSkillName = function(f) { // f = callback
 
 on("change:repeating_weapons:skill", function(e) { // e = event
 	let k = e.newValue;
-	let a = [k, k + "-half", k + "-fifth"];
-	let b = false;
-	if (k.substr(0, k.length-1).endsWith("custom")) {
-		a.push(k + "-name");
-		b = true;
-	}
-	getAttrs(a, v => {
-		setAttrs({
-			"repeating_weapons_skill-val" : v[k] || 1,
-			"repeating_weapons_skill-half" : v[k + "-half"] || 1,
-			"repeating_weapons_skill-fifth" : v[k + "-fifth"] || 1,
-			"repeating_weapons_skill-txt" : b ? v[k + "-name"] : getLang(e.newValue) || "—"
+	if (k) {
+		let a = [k, k + "-half", k + "-fifth"];
+		let b = false;
+		if (k.substr(0, k.length-1).endsWith("custom")) {
+			a.push(k + "-name");
+			b = true;
+		}
+		getAttrs(a, v => {
+			setAttrs({
+				"repeating_weapons_skill-val" : v[k] || 1,
+				"repeating_weapons_skill-half" : v[k + "-half"] || 1,
+				"repeating_weapons_skill-fifth" : v[k + "-fifth"] || 1,
+				"repeating_weapons_skill-txt" : b ? v[k + "-name"] : getLang(e.newValue) || "—"
+			});
 		});
-	});
+	} else {
+		setAttrs({
+			"repeating_weapons_skill-val" : 1,
+			"repeating_weapons_skill-half" : 1,
+			"repeating_weapons_skill-fifth" : 1,
+			"repeating_weapons_skill-txt" : "—"
+		});
+	}
 });
 
+const updateWeaponDamage = function(id) { // id = repeating attribute id
+	getSectionIDs("weapons", function(ids) {
+		let a = ["char-db"];
+		let b = [];
+		ids.forEach(o => {
+			if (id == null || id == o) {
+				a.push(`repeating_weapons_${o}_dmg`);
+				b.push(o);
+			}
+		});
+		getAttrs(a, v => {
+			let r = /^(.*)\s*\/\s*(\d+)\s*(m|y|yd)$/i; // dmg-rng regexp
+			let k, s;
+			let u = {};
+			b.forEach(o => {
+				k = "repeating_weapons_" + o + "_";
+				s = v[k + "dmg"];
+				setUniqueIdentifier(k);
+				if (r.test(s)) { // has damage radius
+					let q = s.match(r);
+					let t = q[3] == "m" ? " m" : (q[3] == "yd" ? "y" : q[3]);
+					s = formatFormula(q[1], "dmg");
+					u[k + "dmg"] = s + "/" + q[2] + t;
+					u[k + "dmg-val"] = s;
+					u[k + "dmg-rng-n"] = q[2];
+					u[k + "dmg-rng-u"] = q[3] == "y" ? "yd" : q[3];
+				} else { // no damage radius
+					s = formatFormula(s, "dmg");
+					u[k + "dmg"] = s;
+					u[k + "dmg-val"] = s;
+					u[k + "dmg-rng-n"] = "0";
+					u[k + "dmg-rng-u"] = "y";
+				}
+				u[k + "dmg-max"] = evalMaxFormula(s);
+			});
+			setAttrs(u, {"silent" : true});
+		});
+	});
+};
+
 on("change:repeating_weapons:dmg", function(e) { // e = event
-	setUniqueIdentifier(e.sourceAttribute.substr(0,39));
-	let s = e.newValue;
-	let k = "repeating_weapons_";
-	let r = /^(.*)\s*\/\s*(\d+)\s*(m|y|yd)$/i; // dmg-rng regexp
-	let u = {};
-	if (r.test(s)) { // has damage radius
-		let q = s.match(r);
-		let t = q[3] == "m" ? " m" : (q[3] == "yd" ? "y" : q[3]);
-		s = formatFormula(q[1], "dmg");
-		u[k + "dmg"] = s + "/" + q[2] + t;
-		u[k + "dmg-val"] = s;
-		u[k + "dmg-rng-n"] = q[2];
-		u[k + "dmg-rng-u"] = q[3] == "y" ? "yd" : q[3];
-	} else { // no damage radius
-		s = formatFormula(s, "dmg");
-		u[k + "dmg"] = s;
-		u[k + "dmg-val"] = s;
-		u[k + "dmg-rng-n"] = "0";
-		u[k + "dmg-rng-u"] = "y";
-	}
-	u[k + "imp"] = evalMaxFormula(s);
-	setAttrs(u, {"silent" : true});
+	updateWeaponDamage(e.sourceAttribute.substr(18,20));
+});
+
+const updateWeaponDamageBonus = function(id) { // id = repeating attribute id
+	getSectionIDs("weapons", function(ids) {
+		let a = ["char-db"];
+		let b = [];
+		ids.forEach(o => {
+			if (id == null || id == o) {
+				a.push(`repeating_weapons_${o}_db`);
+				b.push(`repeating_weapons_${o}_db-half`);
+			}
+		});
+		getAttrs(a.concat(b), v => {
+			let u = {};
+			a.forEach(o => {
+				if (v[o + "-half"] == "1") {
+					u[o + "-val"] = "floor(" + v["char-db"] + "/2)";
+					u[o + "-max"] = (evalMaxFormula(v["char-db"]) / 2).toString();
+				} else if (v[o] == "1") {
+					u[o + "-val"] = v["char-db"];
+					u[o + "-max"] = (evalMaxFormula(v["char-db"])).toString();
+				} else {
+					u[o + "-val"] = "0";
+					u[o + "-max"] = "0";
+				}
+			});
+			setAttrs(u, {"silent" : true});
+		});
+	});
+};
+
+on("change:char-db", function(e) { // e = event
+	let s = formatFormula(e.newValue, "dmg-bon");
+	setAttrs({"char-db" : s}, {"silent" : true}, updateWeaponDamageBonus);
+});
+
+on("change:repeating_weapons:db change:repeating_weapons:db-half", function(e) { // e = event
+	updateWeaponDamageBonus(e.sourceAttribute.substr(18,20));
 });
 
 const updateWeaponRange = function(id, f) { // id = repeating attribute id, f = callback
@@ -693,8 +787,10 @@ const updateWeaponRange = function(id, f) { // id = repeating attribute id, f = 
 				} else {
 					n = toInt(v[k + "rng-txt"]);
 				}
-				if (n == 0) r = getLang("wpn-rng-touch");
-				else if (n > 0) r = n + " " + getLang("u-" + v[k + "rng-u"]);
+				if (v[k + "rng-u"] != "") {
+					if (n == 0) r = getLang("wpn-rng-touch");
+					else if (n > 0) r = n + " " + getLang("u-" + v[k + "rng-u"]);
+				}
 				u[k + "rng"] = r;
 			});
 			setAttrs(u, {"silent" : true}, function() {
@@ -724,25 +820,6 @@ on("change:repeating_weapons:ammo", function(e) { // e = event
 	updateWeaponAmmo(e.sourceAttribute.substr(0,39));
 });
 
-const updateWeaponDamageBonus = function(k) { // k = repeating key
-	getAttrs(["char-db", k + "db", k + "db-half"], v => {
-		let u = {};
-		let s = v["char-db"]
-		if (v[k + "db"] == "0") {
-			u[k + "db-half"] = "0";
-			s = "0";
-		} else if (v[k + "db-half"] == "1") {
-			s = "floor(" + s + "/2)";
-		}
-		u[k + "db-val"] = s;
-		setAttrs(u);
-	});
-};
-
-on("change:repeating_weapons:db change:repeating_weapons:db-half", function(e) { // e = event
-	updateWeaponDamageBonus(e.sourceAttribute.substr(0,39));
-});
-
 on("change:repeating_weapons:malf", function(e) { // e = event
 	let n = toInt(e.newValue);
 	let u = {};
@@ -757,35 +834,6 @@ on("change:repeating_weapons:malf", function(e) { // e = event
 	setAttrs(u, {"silent" : true});
 });
 
-const updateWeaponDamage = function() {
-	getSectionIDs("weapons", function(ids) {
-		let a = ["char-db"];
-		let b = [];
-		ids.forEach(o => {
-			a.push(`repeating_weapons_${o}_db`);
-			b.push(`repeating_weapons_${o}_db-half`);
-		});
-		getAttrs(a.concat(b), v => {
-			let u = {};
-			a.forEach(o => {
-				if (v[o + "-half"] == "1") {
-					u[o + "-val"] = "floor(" + v["char-db"] + "/2)";
-				} else if (v[o] == "1") {
-					u[o + "-val"] = v["char-db"];
-				} else {
-					u[o + "-val"] = 0;
-				}
-			});
-			setAttrs(u, {"silent" : true});
-		});
-	});
-};
-
-on("change:char-db", function(e) { // e = event
-	let s = formatFormula(e.newValue, "dmg-bon");
-	setAttrs({"char-db" : s}, {"silent" : true}, updateWeaponDamage);
-});
-
 // =============================================================================
 // -----------------------------------------------------------------------------
 // # Spells
@@ -798,6 +846,23 @@ on("change:repeating_spells:cost-mp change:repeating_spells:cost-san", function(
 	let u = {};
 	u[`repeating_spells_${k}`] = s;
 	setAttrs(u, {"silent" : true});
+});
+
+// =============================================================================
+// -----------------------------------------------------------------------------
+// # Equipment
+// -----------------------------------------------------------------------------
+// =============================================================================
+
+const updateComputedField = function(k, s, p) { // k = source attribute, s = new value, p = previous value
+	let r = Formulas["pts"];
+	let u = {};
+	u[k] = r.test(s.trim()) ? eval(s) : p || 0;
+	setAttrs(u, {"silent" : true});
+};
+
+on("change:cash", function(e) { // e = event
+	updateComputedField(e.sourceAttribute, e.newValue, e.previousValue);
 });
 
 // =============================================================================
@@ -819,18 +884,66 @@ on("change:mons-dodge change:repeating_attacks:score", function(e) { // e = even
 	setAttrs(u);
 });
 
-const updateAttackDamageBonus = function(k) { // k = repeating key
-	getAttrs(["mons-db", k + "db"], v => {
-		let u = {};
-		let s = v["mons-db"]
-		if (v[k + "db"] == "0") s = "0";
-		u[k + "db-val"] = s;
-		setAttrs(u);
+const updateAttackDamage = function(id) { // id = repeating key id
+	getSectionIDs("attacks", function(ids) {
+		let a = [], b = [];
+		ids.forEach(o => {
+			if (id == null || id == o) {
+				a.push(`repeating_attacks_${o}_dmg`);
+				b.push(o);
+			}
+		});
+		getAttrs(a, v => {
+			let u = {};
+			let k;
+			b.forEach(o => {
+				k = `repeating_attacks_${o}_`;
+				u[k + "dmg-max"] = evalMaxFormula(v[k + "dmg"]);
+			});
+			setAttrs(u, {"silent" : true});
+		});
 	});
 };
 
+on("change:repeating_attacks:dmg", function(e) { // e = event
+	updateAttackDamage(e.sourceAttribute.substr(18,20));
+});
+
+const updateAttackDamageBonus = function(id) { // id = repeating key id
+	getSectionIDs("attacks", function(ids) {
+		let a = ["mons-db"], b = [];
+		ids.forEach(o => {
+			if (id == null || id == o) {
+				a.push(`repeating_attacks_${o}_db`);
+				b.push(o);
+			}
+		});
+		getAttrs(a, v => {
+			let u = {};
+			let k;
+			let s = v["mons-db"];
+			let m = evalMaxFormula(s);
+			b.forEach(o => {
+				k = `repeating_attacks_${o}_`;
+				if (v[k + "db"] == "0") {
+					u[k + "db-val"] = "0";
+					u[k + "db-max"] = "0";
+				} else {
+					u[k + "db-val"] = s;
+					u[k + "db-max"] = m;
+				}
+			});
+			setAttrs(u, {"silent" : true});
+		});
+	});
+};
+
+on("change:mons-db", function(e) { // e = event
+	updateAttackDamageBonus();
+});
+
 on("change:repeating_attacks:db", function(e) { // e = event
-	updateAttackDamageBonus(e.sourceAttribute.substr(0,39));
+	updateAttackDamageBonus(e.sourceAttribute.substr(18,20));
 });
 
 const updateAttackOpposedCheck = function(id) { // id = repeating key id
@@ -886,8 +999,11 @@ const updateRatio = function(k, s) { // k = attr key, s = attr value
 	}
 	if (n == null) n = toInt(s);
 	getAttrs(["sheet-type"], v => {
-		if (n < 0 || (toInt(v["sheet-type"]) <= 2 && n > 99)) {
-			let m = Characteristics.includes(k) ? 100 : 99;
+		let m = Characteristics.includes(k) ? 99 : 109; // max characteristic score is 99 ; max skill level is 99 + 1D10 (i.e. 109)
+		if (k == "siz") m = 200; // human SIZ can exceed 100, but this is exceptional
+		else if (k == "pow") m = 150; // human POW can exceed 100, but this is exceptional
+		else if (k == "sk-credit-rating" || k == "sk-cthulhu-mythos") m = 99; // Credit Rating and Cthulhu Mythos cannot exceed 99 (no advancement during development phase)
+		if (n < 0 || (v["sheet-type"] == "1" && n > m)) {
 			u[k] = clamp(n, 0, m);
 		} else {
 			u[k + "-half"] = Math.floor(n / 2);
@@ -1161,7 +1277,7 @@ const importMonsterData = function(o, name) { // o = compendium data, name = str
 		"intelligence" : "int",
 		"power" : "pow"
 	};
-	u2["sheet-type"] = "4";
+	u2["sheet-type"] = "3";
 	u1["tab"] = "1";
 	u1["mons-name"] = name;
 	u1["mons-type"] = checkValue(o["type"]);
@@ -1514,7 +1630,7 @@ on("clicked:data-cancel", closeModal);
 // -----------------------------------------------------------------------------
 // =============================================================================
 
-const initializeSheet = function () {
+const createRepeatingItems = function() { // returns object
 	let u1 = {};
 	let u2 = {};
 	let l = {};
@@ -1550,6 +1666,10 @@ const initializeSheet = function () {
 										setAttrs(u1, {"silent" : true}, function() {
 											setAttrs(u2);
 										});
+										return {
+											"u1" : u1,
+											"u2" : u2
+										};
 									});
 								});
 							});
@@ -1559,31 +1679,75 @@ const initializeSheet = function () {
 			});
 		});
 	});
+}
+
+const initializeSheet = function () {
+	getAttrs(["add-empty-rows"], v => {
+		if (v["add-empty-rows"] == "1") createRepeatingItems();
+		else setAttrs({"sheet-init" : "1"}, {"silent" : true});
+		recalcInsanityIndefiniteCap();
+	});
+};
+
+const updateSheetVersion = {
+	"1.03" : function() {
+		getSectionIDs("weapons", function(ids) {
+			let a = [];
+			let b = [];
+			ids.forEach(o => {
+				a.push(`repeating_weapons_${o}`);
+				b.push(`repeating_weapons_${o}_imp`);
+			});
+			getAttrs(["sheet-type", "san", ...b], v => {
+				let u = {};
+				a.forEach(o => u[o + "_dmg-max"] = v[o + "_imp"]);
+				u["san-base"] = v["san"];
+				switch(v["sheet-type"]) {
+					case "2": u["sheet-type"] = 1; break;
+					case "3": u["sheet-type"] = 2; break;
+					case "4": u["sheet-type"] = 3; break;
+				}
+				setAttrs(u, {"silent" : true}, function() {
+					updateChatName();
+					updatePoints("hp");
+					updateWeaponDamage();
+					updateWeaponDamageBonus();
+					updateAttackDamage();
+					updateAttackDamageBonus();
+					recalcInsanityIndefiniteCap();
+				});
+			});
+		});
+	}
 };
 
 const checkVersion = function() {
 	getAttrs(["sheet-version", "sheet-init", "sheet-lang"], v => {
 		let n = parseFloat(v["sheet-version"]);
 		let s = getTranslationLanguage();
-		let b = false;
+		let c1 = v["sheet-init"] == "0";
+		let c2 = n < Sheet.version;
+		let c3 = v["sheet-lang"] != s;
 		let u = {};
-		if (v["sheet-init"] == "0") {
-			console.info("Achtung! Cthulhu (Coc 7th) Character Sheet being initialized"); // DEBUG
-			initializeSheet();
-		}
-		if (v["sheet-lang"] != s) {
-			updateCharacterSheetLanguage();
-			u["sheet-lang"] = s;
-			b = true;
-		}
-		if (n < Sheet.version) {
-			console.info("Character Sheet updated to version " + Sheet.version);
-			u["sheet-version"] = Sheet.version;
-			b = true;
+		if (c1 || c2 || c3) {
+			if (c1 || c2) {
+				u["sheet-version"] = Sheet.version;
+				if (c1) {
+					console.info("Achtung! Cthulhu (Coc 7th) Character Sheet being initialized"); // DEBUG
+					initializeSheet();
+				} else if (c2) {
+					if (n < 1.03) updateSheetVersion["1.03"]();
+					console.info("Character Sheet updated to version " + Sheet.version);
+				}
+			}
+			if (c3) {
+				updateCharacterSheetLanguage();
+				u["sheet-lang"] = s;
+			}
+			setAttrs(u, {"silent" : true});
 		} else {
 			console.info("Achtung! Cthulhu (Coc 7th) Character Sheet v" + Sheet.version.toFixed(2) + " loaded");
 		}
-	if (b) setAttrs(u, {"silent" : true});
 	});
 };
 
