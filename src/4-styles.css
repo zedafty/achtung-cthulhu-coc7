@@ -1566,7 +1566,7 @@ input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-poi
 /* ========================================================================== */
 
 .logo {
-	background-repeat: no-repeat;
+	background-repeat: no-repeat !important;
 }
 
 /* ========================================================================== */

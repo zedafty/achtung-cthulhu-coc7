@@ -307,10 +307,10 @@
 
 	/* Theme 2 */
 	.theme[value="2"] ~ .page .logo {
-		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-en-bw.png") !important;
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-en-unofficial-bw.png") !important;
 	}
 	input[name="attr_sheet-lang"][value="fr"] ~ .theme[value="2"] ~ .page .logo {
-		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-fr-bw.png") !important;
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-call-of-cthulhu-fr-unofficial-bw.png") !important;
 	}
 	.theme[value="2"] ~ .page .main {
 		margin-top: 0;
