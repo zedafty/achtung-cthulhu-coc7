@@ -295,7 +295,7 @@
 
 	/* Theme 1 */
 	.theme[value="1"] ~ .page .logo {
-		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung-cthulhu-bw.png") !important;
+		background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung-unofficial-cthulhu-bw.png") !important;
 	}
 	.theme[value="1"] ~ .page .main {
 		margin: 0;
