@@ -1536,27 +1536,10 @@ input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-poi
 /* -------------------------------------------------------------------------- */
 /* ========================================================================== */
 
-.headline::after {
-	content: "";
-	display: table;
-	width: 100%;
-}
-.headline > .logo {
-	position: relative;
-	display: inline-block;
-	width: 300px;
-	height: 70px;
-}
-.headline > .sheet-type,
-.headline > .status {
-	float: right;
-	margin-top: 10px;
-}
-.headline > .status {
-	width: calc(100% - 300px);
-}
-.theme:not([value="0"]) ~ .page .headline > .status {
-	width: calc(100% - 348px);
+.headline {
+	display: grid;
+	grid-template-columns: 180px auto 48px;
+	grid-column-gap: 20px;
 }
 
 /* ========================================================================== */
@@ -1566,7 +1549,26 @@ input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-poi
 /* ========================================================================== */
 
 .logo {
+	height: 70px;
 	background-repeat: no-repeat !important;
+}
+
+/* ========================================================================== */
+/* -------------------------------------------------------------------------- */
+/* # Status */
+/* -------------------------------------------------------------------------- */
+/* ========================================================================== */
+
+.headline .status {
+	display: grid;
+	grid-template-columns: 45% 55%;
+	align-self: center;
+}
+}
+.headline .status .edit-field[type="number"],
+.headline .status .number {
+	min-width: 32px;
+	flex-shrink: 2;
 }
 
 /* ========================================================================== */
@@ -1579,29 +1581,13 @@ input[name="attr_show-magic"][value="1"] ~ .header .heading > .points .magic-poi
 	display: none;
 	width: 48px;
 	height: 48px;
-	vertical-align: top;
+	align-self: center;
 }
 .headline .sheet-type i.icon {
 	margin: 4px;
 }
 .theme:not([value="0"]) ~ .page .headline .sheet-type {
 	display: inline-block;
-}
-
-/* ========================================================================== */
-/* -------------------------------------------------------------------------- */
-/* # Status */
-/* -------------------------------------------------------------------------- */
-/* ========================================================================== */
-
-.headline .status {
-	display: grid;
-	grid-template-columns: 45% 55%;
-}
-.headline .status .edit-field[type="number"],
-.headline .status .number {
-	min-width: 32px;
-	flex-shrink: 2;
 }
 
 /* ========================================================================== */

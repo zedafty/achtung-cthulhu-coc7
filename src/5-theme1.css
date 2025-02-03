@@ -221,8 +221,7 @@
 /* ========================================================================== */
 
 .theme[value="1"] ~ .page .logo {
-	left: -6px;
-	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung-unofficial.png");
+	background-image: url("https://raw.githubusercontent.com/zedafty/achtung-cthulhu-coc7/main/img/logo-achtung-cthulhu-unofficial.png");
 }
 
 /* ========================================================================== */
